@@ -1,0 +1,15 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf Python-3.11.4.tar.xz
+
+cd Python-3.11.4
+
+./configure --prefix=/usr   \
+            --enable-shared \
+            --without-ensurepip
+
+make
+
+make install

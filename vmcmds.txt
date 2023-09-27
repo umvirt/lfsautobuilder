@@ -1,0 +1,14 @@
+vmstart
+copysrc
+initdirs
+adduser
+chown2user
+runscriptsbyroot
+deletesrc
+copysrc
+chrootinit
+chrootmount
+runchrootscripts
+deletesrc
+vmfinish
+chrootumount

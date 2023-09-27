@@ -1,0 +1,8 @@
+#!/bin/sh
+tmux new-session -d 'tmux/navigator-cscripts'
+#tmux split-window -h 'top'
+tmux split-window -v 'time ./runchrootscripts'
+#tmux split-window -h
+#tmux new-window 'mutt'
+tmux -2 attach-session -d
+

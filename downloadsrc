@@ -1,0 +1,2 @@
+cd src
+wget -c -i ../books/wget-list  -o ../tmp/wget.log

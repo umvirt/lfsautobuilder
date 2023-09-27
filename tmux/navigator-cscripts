@@ -1,0 +1,11 @@
+while [ 1 ]
+do
+
+clear 
+
+ls cscripts | grep --color -B 5 -A 5 `cat log/current_script`
+
+sleep 20
+
+done
+

@@ -1,0 +1,29 @@
+if [ "$USER" != "root" ] ; then 
+echo "WRONG USER"
+
+exit
+fi
+
+date +%s > log/autobuild.start
+
+for s in `cat vmcmds.txt` ; do
+
+
+echo "Running: $s"
+
+sleep 1
+
+date +%s > log/_$s.start
+
+echo $s > log/current_autoscript
+
+./$s
+
+#scripts/$s | tee log/$s.log
+
+
+date +%s > log/_$s.end
+
+done
+
+date +%s > log/autobuild.end

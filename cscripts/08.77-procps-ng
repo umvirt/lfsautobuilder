@@ -1,0 +1,26 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf procps-ng-4.0.3.tar.xz
+
+cd procps-ng-4.0.3
+
+./configure --prefix=/usr                           \
+            --docdir=/usr/share/doc/procps-ng-4.0.3 \
+            --disable-static                        \
+            --disable-kill                          \
+            --with-systemd
+
+make
+
+if [[ "$ULFS_TESTS" == "YES" ]]
+then
+
+make check
+
+fi
+
+
+make install
+

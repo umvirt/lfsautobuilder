@@ -1,0 +1,34 @@
+. /cscripts/env.sh
+
+cd /sources
+
+rm -rfv gawk-5.2.2
+
+tar -xf gawk-5.2.2.tar.xz
+
+cd gawk-5.2.2
+
+sed -i 's/extras//' Makefile.in
+
+./configure --prefix=/usr
+
+make
+
+if [[ "$ULFS_TESTS" == "YES" ]]
+then
+
+chown -Rv tester .
+su tester -c "PATH=$PATH make check"
+
+fi
+
+make LN='ln -f' install
+
+ln -sv gawk.1 /usr/share/man/man1/awk.1
+
+
+if [[ "$ULFS_DOCS" == "YES" ]]
+then
+mkdir -pv                                   /usr/share/doc/gawk-5.2.2
+cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-5.2.2
+fi

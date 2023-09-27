@@ -1,0 +1,18 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf bc-6.6.0.tar.xz
+
+cd bc-6.6.0
+
+CC=gcc ./configure --prefix=/usr -G -O3 -r
+
+make
+
+if [[ "$ULFS_TESTS" == "YES" ]]
+then
+make test
+fi
+
+make install

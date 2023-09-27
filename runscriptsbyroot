@@ -1,0 +1,2 @@
+su - lfs -c "cd `pwd` && time ./runscripts"
+

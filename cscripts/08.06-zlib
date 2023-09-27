@@ -1,0 +1,21 @@
+. /cscripts/env.sh
+
+cd /sources
+
+tar -xf zlib-1.2.13.tar.xz
+
+cd zlib-1.2.13
+
+./configure --prefix=/usr
+
+make
+
+if [[ "$ULFS_TESTS" == "YES" ]]
+then
+make check
+fi
+
+
+make install
+
+rm -fv /usr/lib/libz.a

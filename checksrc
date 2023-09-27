@@ -1,0 +1,67 @@
+echo "------------------------------------"
+echo " Linux From Scratch Integrity Check "
+echo "------------------------------------"
+
+mkdir tmp 2>/dev/null
+
+#parsing wget list
+./dlist.php | sort > tmp/dlist.txt 
+
+cd src
+
+#check checksums of found files and store report in sorted order
+md5sum --ignore-missing -c ../books/md5sums | sort > ../tmp/src.md5
+echo
+
+cd ../tmp
+
+#List files in sorted order
+ls ../src | sort > src.txt
+
+#Compare local files list and wanted files list
+comm -13 src.txt dlist.txt > dmissing.txt
+
+(cat ../books/md5sums | awk '{print $2}') | sort > md5.txt
+
+dsrc=`wc -l ../books/wget-list | awk '{print $1}'` 
+
+csrc=`wc -l src.txt | awk '{print $1}'` 
+
+md5=`wc -l md5.txt | awk '{print $1}'` 
+
+
+failures=`grep -v OK src.md5 | wc -l`
+dmissing=`wc -l dmissing.txt | awk '{print $1}'` 
+
+
+echo "Downloading check"
+echo 
+echo "Files wanted: $dsrc "
+echo "Files found: $csrc "
+echo "Files not found: $dmissing "
+
+if [ "$dmissing" -gt 0 ]; then
+
+echo
+echo "Missed files:"
+echo 
+cat dmissing.txt
+
+
+fi
+
+echo 
+echo "Checksum check"
+echo
+echo "Files with checksums: $md5 "
+echo "Files with wrong checksums: $failures "
+
+
+if [ "$failures" -gt 0 ]; then
+
+echo
+echo "Corrupted files:"
+echo 
+grep -v OK src.md5 | awk -F: '{print $1}'
+
+fi
