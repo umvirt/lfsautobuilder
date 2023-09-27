@@ -11,7 +11,21 @@ cd linux-6.4.12
 #FORCING ARCH 
 ARCH=""
 
-if [[ "$LFS_TGT"=="i686-lfs-linux-gnu" ]] 
+if [[ "$LFS_TGT" == "i486-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386"
+
+fi
+
+if [[ "$LFS_TGT" == "i586-lfs-linux-gnu" ]]
+then
+
+ARCH="ARCH=i386"
+
+fi
+
+if [[ "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
 then
 
 ARCH="ARCH=i386"

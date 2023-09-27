@@ -9,12 +9,29 @@ cd openssl-3.1.2
 #FORCING ARCH
 ARCH=""
 
+if [[ "$LFS_TGT" == "i486-lfs-linux-gnu" ]]
+then
+
+ARCH="linux-x86"
+
+fi
+
+if [[ "$LFS_TGT" == "i586-lfs-linux-gnu" ]]
+then
+
+ARCH="linux-x86"
+
+fi
+
+
 if [[ "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
 then
 
 ARCH="linux-x86"
 
 fi
+
+
 
 
 ./config $ARCH --prefix=/usr         \
