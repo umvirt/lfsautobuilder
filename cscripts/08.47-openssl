@@ -6,7 +6,18 @@ tar -xf openssl-3.1.2.tar.gz
 
 cd openssl-3.1.2
 
-./config --prefix=/usr         \
+#FORCING ARCH
+ARCH=""
+
+if [[ "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
+then
+
+ARCH="linux-x86"
+
+fi
+
+
+./config $ARCH --prefix=/usr         \
          --openssldir=/etc/ssl \
          --libdir=lib          \
          shared                \

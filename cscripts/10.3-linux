@@ -8,21 +8,37 @@ tar -xf linux-6.4.12.tar.xz
 
 cd linux-6.4.12
 
+#FORCING ARCH 
+ARCH=""
+
+if [[ "$LFS_TGT"=="i686-lfs-linux-gnu" ]] 
+then
+
+ARCH="ARCH=i386"
+
+fi
 
 make mrproper
 
 
-make defconfig
 
-make
+echo "$ARCH make defconfig" >> kernelbuilder
 
-make modules_install
+echo "$ARCH make" >> kernelbuilder
 
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.4.12-lfs-12.0-systemd
+echo "$ARCH make modules_install" >> kernelbuilder
 
-cp -iv System.map /boot/System.map-6.4.12
+chmod +x kernelbuilder
 
-cp -iv .config /boot/config-6.4.12
+cat kernelbuilder
+
+./kernelbuilder
+
+cp -v arch/x86/boot/bzImage /boot/vmlinuz-6.4.12-lfs-12.0-systemd
+
+cp -v System.map /boot/System.map-6.4.12
+
+cp -v .config /boot/config-6.4.12
 
 #cp -r Documentation -T /usr/share/doc/linux-6.4.12
 
