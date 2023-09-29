@@ -502,4 +502,6 @@ In log directory you can found followed files:
     - \_%scriptname%.end - Unix-timestamp of moment after running a script.
 - current_autoscript - current top-level script runned in automatic mode.
 - current_script - current script called on both stages.
-- last_script.files - count of files installed by previuous script. If this file is contain "0", this means that error has occurred and further installation should be interrupted.
+- last_script.files - count of files installed by previous script. If this file is contain "0", this means that error has occurred and further installation should be interrupted.
+- autobuild.start - Unix-timestamp of moment before running an automatic build script.
+- autobuild.end - Unix-timestamp of moment after running an automatic build script.
