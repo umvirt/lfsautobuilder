@@ -8,7 +8,7 @@ License: GPL
 
 ## About
 
-Automated Linux From Scratch (LFS) base image builder.
+Automated Linux From Scratch (LFS) base bootable image builder.
 
 ## Disclaimer
 
@@ -16,65 +16,67 @@ Data backup is needed before using this software.
 
 This software is aimed to experienced Linux From Scratch maintainers.
 
-Runing this software by unexperienced users can lead to data loss & hadware damage! 
+**Runing this software by unexperienced users can lead to data loss & hardware damage!**
 
 ## Building environment
 
 There are few variants of building environment:
 
-1.Physical computer.
+1. Virtual Machine with two drives.
 
-1.a.Physical computer with local disk.
+2. Physical computer:
 
-1.b.Physical computer with block device.
+2.a. Physical computer with local disk.
 
-2.Virtual Machine with two drives.
+2.b. Physical computer with block device.
 
 ### Pros & cons
 
-**1.Physical computer**
+**1. Virtual Machine with two drives**
 
 Pros:
 
-- maximum amount of available memory  
+- no additional software that can affect on building process,
+- absolutely safe,
+- no issues with GRUB bootloader installation.
 
 Cons:
 
-- installed software can affect on building process.
+- a part of available memory is taken by virtualiztion host (OS, hypervisor, management tools, etc.),
+- slower than physical computer.
+
+**2. Physical computer**
+
+Pros:
+
+- maximum amount of memory is available,
+- maximum amount of CPU's cores is available.
+
+Cons:
+
+- installed software can affect on building process,
 - error can damage installed software & data.
 
-**1.a.Physical computer with local disk**
+**2.a. Physical computer with local disk**
 
 Pros:
 
-- faster than block device
+- faster than using block device.
 
 Cons:
 
-- additional drive is needed
+- additional drive is needed.
 
-**1.b.Physical computer with block device**
+**1.b. Physical computer with block device**
 
 Pros:
 
-- can be used free diskspace
+- can be used free diskspace on existent partitions.
 
 Cons:
 
+- slower than local disk,
 - issues with GRUB bootloader installation. GRUB Live CD is needed to boot & install bootloader manualy.
-
-**2.virtual machine with two drives**
-
-Pros:
-
-- no additional software that can affect on building process
-- absolutely safe
-- no issues with grub
-
-Cons:
-
-- part of available memory is taken by host
-- slower than physical computer
 
 ### Requirements
 
@@ -82,12 +84,11 @@ Cons:
 
 **CPU:** x86_64 (amd64)
 
-
 **HDD:** 30GB
 
-**SWAP:** no
+**SWAP:** none
 
-**RAM:** 2GB per core 
+**RAM:** 2GB per CPU's core 
 
 #### Software
 
@@ -177,8 +178,7 @@ After building you will get:
 - Timezone: UTC
 - Root password: none
 
-This is not the end. It's just a beginning!
-
+This is not the final product. It's a base for further configuration and customization.
 
 ## Preparation
 
@@ -250,6 +250,60 @@ After formating you can mount partition:
 
     mount /dev/mapper/loop3p1 builddir
 
+### Configuration
+
+### Files
+
+There are 4 configuration files
+
+- configuration file for scripts to run on host as root: *env.sh*
+- configuration file for scripts to run on target partition as lfs user: *userenv.sh*
+- configuration files for scripts to run on target partition in chroot mode as root user: *cscripts.config/config.sh*, *cscripts.config/env.sh*
+
+Configuration files are BASH-scripts that loaded from other scripts.
+They can act as scripts too. Commands that called in configuration files are also called by other scripts.
+
+To view contents of config files at once, you can use showconfig script:
+
+    ./showconfig
+
+### Directives
+
+Configuration directives on all config files have same meaning but various area of influence.
+
+#### LFS\_TGT
+
+Target system architecture.
+
+Default: $(uname -m)-lfs-linux-gnu
+
+Supported values:
+
+-  $(uname -m)-lfs-linux-gnu
+-  x86_64-lfs-linux-gnu
+-  i686-lfs-linux-gnu
+
+#### MAKEFLAGS
+
+Options for Make build system.
+
+For example, "-j8" for run compilation in 8 threads.
+
+#### NINJAJOBS
+
+Number of CPU's cores which used by Ninja build system.
+
+#### ULFS\_TESTS
+
+"YES" for run non-critical tests on compilation time. Any other value - skip tests.
+
+#### ULFS\_CRITICAL\_TESTS
+
+"YES" for run critical tests on compilation time. Any other value - skip tests.
+
+#### ULFS\_DOCS
+
+"YES" for install documentation when it possibe. Any other value - skip documentation install.
 
 ## Building
 
@@ -269,7 +323,7 @@ You can place this command in time program to count build time:
 
 ### Semiautomatic build
 
-### Initial state
+#### Initial state
 
 Before start you have:
 
@@ -278,7 +332,7 @@ Before start you have:
 - Target partition mounted in builddir directory.
 - You logined as *root* and located on root directory of this software.
 
-### Stage 0
+#### Stage 0
 
 Copy source code to target partition
 
@@ -296,12 +350,12 @@ Change directiories ownership on target partition to *lfs* user
 
     ./chown2user
 
-### Stage 1
+#### Stage 1
 
 On this stage all operations performed by *lfs* user.
 You can emulate *lfs* user activity by *root* or login as *lfs*
 
-### Variant A. Running Stage 1 by root
+##### Variant A. Running Stage 1 by root
 
 If you want to make operations from root run the command
 
@@ -313,7 +367,7 @@ If everything is ok delete source code packages from target partition
 
 Now you can go to next stage
 
-### Variant B. Running Stage 2 by lfs
+##### Variant B. Running Stage 2 by lfs
 
 Login to *lfs* shell
 
@@ -335,7 +389,7 @@ Logout from *lfs* shell
 
     exit
 
-### Stage 2
+#### Stage 2
 
 Check that you *root*. If not login as *root*:
 
@@ -413,7 +467,8 @@ Unmount target partition
 - initdirs - create dirs in target.
 - runchrootscripts - run all chroot scripts one by one (Stage 2).
 - runscripts - run lfs scripts one by one (Stage 1).
-- runscriptsbyroot.
+- runscriptsbyroot - run *runscripts* script as root.
+- showconfig - show contets of all config files.
 - tmux-cscripts - run cscripts with tmux (experimental).
 - userenv.sh - config file for lfs user.
 - version-check.sh - check package versions.
