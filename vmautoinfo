@@ -1,0 +1,125 @@
+seconds2time() {
+ ((h=${1}/3600))
+ ((m=(${1}%3600)/60))
+ ((s=${1}%60))
+ printf "%02d:%02d:%02d\n" $h $m $s
+}
+
+PWD=`pwd`
+TGTDIR="$PWD/builddir"
+LOGDIR="$PWD/log"
+ROM_FREE=`df -B M $TGTDIR --output=avail | tail -n 1`
+RAM_FREE="`free -m | grep Mem: | awk '{print $7};'`M"
+CURRENT_AUTOSCRIPT=`cat $LOGDIR/current_autoscript`
+CURRENT_SCRIPT=`cat $LOGDIR/current_script`
+AUTOSCRIPTS_COUNT=`cat $PWD/vmcmds.txt | wc -l`
+AUTOSCRIPTS_POSITION=`cat $PWD/vmcmds.txt | grep -B 1000 $CURRENT_AUTOSCRIPT | wc -l`
+AUTOSCRIPTS_PROGRESS=`echo "scale=2; ($AUTOSCRIPTS_POSITION/$AUTOSCRIPTS_COUNT)*100" | bc -l`
+
+
+NOW=`date +%s`
+AUTOBUILD_TIMESTART=`cat $LOGDIR/autobuild.start`
+AUTOBUILD_TIME=$(seconds2time $(($NOW-$AUTOBUILD_TIMESTART)) )
+
+
+echo "Umvirt LFS Auto Builder Monitor"
+echo "-------------------------------"
+echo ""
+
+if [ -f $LOGDIR/autobuild.end ]
+then
+
+echo "Disk image building is completed!"
+echo
+echo "You can check a logs for details."
+exit
+
+fi
+
+
+echo "RAM: $RAM_FREE free"
+echo "ROM: $ROM_FREE free"
+echo ""
+echo "Build time: $AUTOBUILD_TIME"
+if [[ $AUTOSCRIPTS_POSITION -gt 0 ]] ; then
+
+AUTOSCRIPTS_PROGRESS=`echo "scale=2; (($AUTOSCRIPTS_POSITION-1)/$AUTOSCRIPTS_COUNT)*100" | bc -l`
+
+fi
+
+echo "Build progress: $AUTOSCRIPTS_PROGRESS%"
+echo ""
+echo "1-Level" 
+echo "-------"
+cat $PWD/vmcmds.txt | grep --color -B 5 -A 5 `cat log/current_autoscript`
+echo ""
+
+echo "Script: $CURRENT_AUTOSCRIPT"
+AUTOSCRIPT_TIMESTART=`cat $LOGDIR/_$CURRENT_AUTOSCRIPT.start`
+AUTOSCRIPT_TIME=$(seconds2time $(($NOW-$AUTOSCRIPT_TIMESTART)))
+echo "Time: $AUTOSCRIPT_TIME"
+echo "Position: $AUTOSCRIPTS_POSITION/$AUTOSCRIPTS_COUNT"
+
+if [[ "$CURRENT_AUTOSCRIPT" == "runscriptsbyroot" ]]
+then
+
+SCRIPTS_COUNT=`cd $PWD/scripts && ls | wc -l`
+SCRIPTS_POSITION=`cd $PWD/scripts && ls | grep -B 1000 $CURRENT_SCRIPT | wc -l`
+SCRIPTS_PROGRESS=`echo "scale=2; ($SCRIPTS_POSITION/$SCRIPTS_COUNT)*100" | bc -l`
+
+if [[ $SCRIPTS_POSITION -gt 0 ]] ; then
+
+SCRIPTS_PROGRESS=`echo "scale=2; (($SCRIPTS_POSITION-1)/$SCRIPTS_COUNT)*100" | bc -l`
+
+fi
+
+echo "Progress: $SCRIPTS_PROGRESS%"
+echo ""
+echo "2-Level"
+echo "-------"
+ls scripts | grep --color -B 5 -A 5 `cat log/current_script`
+echo ""
+
+echo "Script: $CURRENT_SCRIPT"
+
+SCRIPT_TIMESTART=`cat $LOGDIR/$CURRENT_SCRIPT.start`
+SCRIPT_TIME=$(seconds2time $(($NOW-$SCRIPT_TIMESTART)))
+echo "Time: $SCRIPT_TIME"
+echo "Position: $SCRIPTS_POSITION/$SCRIPTS_COUNT"
+
+fi
+
+if [[ "$CURRENT_AUTOSCRIPT" == "runchrootscripts" ]]
+then
+
+SCRIPTS_COUNT=`cd $PWD/cscripts && ls | wc -l`
+SCRIPTS_POSITION=`cd $PWD/cscripts && ls | grep -B 1000 $CURRENT_SCRIPT | wc -l`
+SCRIPTS_PROGRESS=`echo "scale=2; ($SCRIPTS_POSITION/$SCRIPTS_COUNT)*100" | bc -l`
+
+if [[ $SCRIPTS_POSITION -gt 0 ]] ; then
+
+SCRIPTS_PROGRESS=`echo "scale=2; (($SCRIPTS_POSITION-1)/$SCRIPTS_COUNT)*100" | bc -l`
+
+fi
+
+echo "Progress: $SCRIPTS_PROGRESS%"
+echo ""
+echo "2-Level"
+echo "-------"
+ls cscripts | grep --color -B 5 -A 5 `cat log/current_script`
+echo ""
+
+echo "Script: $CURRENT_SCRIPT"
+SCRIPT_TIMESTART=`cat $LOGDIR/$CURRENT_SCRIPT.start`
+SCRIPT_TIME=$(seconds2time $(($NOW-$SCRIPT_TIMESTART)))
+echo "Time: $SCRIPT_TIME"
+echo "Position: $SCRIPTS_POSITION/$SCRIPTS_COUNT"
+echo ""
+
+fi
+
+
+
+
+echo ""
+

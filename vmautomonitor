@@ -1,0 +1,11 @@
+while [ 1 ]
+do
+
+clear
+
+./vmautoinfo
+
+sleep 20
+
+done
+
