@@ -5,10 +5,10 @@ adduser
 chown2user
 runscriptsbyroot
 deletesrc
-copysrc
+copysrc2
 chrootinit
 chrootmount
 runchrootscripts
-deletesrc
+deletesrc2
 vmfinish
 chrootumount
