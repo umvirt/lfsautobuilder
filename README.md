@@ -474,6 +474,8 @@ Unmount target partition
 - userenv.sh - config file for lfs user.
 - version-check.sh - check package versions.
 - vmautobuild - one click target building **(DANGEROUS*)**
+- vmautoinfo - this script prints useful information about auto building.
+- vmautomonitor - script that call *vmautoinfo* script in loop after delay.
 - vmcmds.txt - one click target building scenario.
 - vmfinish - like finish but with root password deletion and grub bootloader installation.
 - vmstart - formats /dev/sda1 partition WITHOUT PROMPT and mout it on mount point **(DANGEROUS*)** 
