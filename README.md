@@ -10,6 +10,12 @@ License: GPL
 
 Automated Linux From Scratch (LFS) base bootable image builder.
 
+Live video demo: [https://www.youtube.com/watch?v=ZqP_4o_DjEA](https://www.youtube.com/watch?v=ZqP\_4o\_DjEA)
+
+TMUX version video demo: [https://www.youtube.com/watch?v=XAwWgJEt_8A](https://www.youtube.com/watch?v=XAwWgJEt\_8A)
+
+Source code: [https://gitlab.com/Umvirt/lfsautobuilder](https://gitlab.com/Umvirt/lfsautobuilder)
+
 ## Disclaimer
 
 Data backup is needed before using this software.
@@ -131,9 +137,12 @@ You have to get:
 
 In addition you also need followed software packages:
 
-- **php** - to run dlist.php
-- **qemu** - to run virtual machine and to create disk images (block devices)
-- **mutipath-tools** - to mount partitions on block devices
+- **php** - to run dlist.php.
+- **qemu** - to run virtual machine and to create disk images (block devices).
+- **mutipath-tools** - to mount partitions on block devices.
+- **tmux** - to run TMUX version of vmautobuild.
+- **git** - to get Builder source code.
+- **markdown** - to convert Builder documentation in HTML format.
 
 ### Resource allocation for VM
 
@@ -182,16 +191,25 @@ This is not the final product. It's a base for further configuration and customi
 
 ## Preparation
 
-### Downloading
+### Downloading Builder
+
+Use *Git* to download Builder:
+
+    git clone https://gitlab.com/Umvirt/lfsautobuilder
+
+After downloading via *Git* you have to make somedirectories:
+
+    make dirs
+
+### Downloading source code packages
 
 Download *wget-list* & *md5sums* files from LFS site and put in books directory
 
-Run *downloadsrc* to get source code packages
+You can download sorce code packages manually or by runing *downloadsrc*:
 
     ./downoadsrc
 
-
-### Integrity check
+### Source code packages integrity check
 
 Run *checksrc* to perform integrity check
 
@@ -226,7 +244,7 @@ To create partition table & bootable ext4 patition you can use *fdisk* command:
 
     fdisk hdd.img
 
-### Disk image partition formating 
+### Disk image partition formatting
 
 *Note: This step is used when building performed on physical computer.
 If you perform building in virtual machine skip this step.*
@@ -246,7 +264,7 @@ Now you can format partition on disk image:
 *Note: This step is used when building performed on physical computer.
 If you perform building in virtual machine skip this step.*
 
-After formating you can mount partition:
+After formatting you can mount partition:
 
     mount /dev/mapper/loop3p1 builddir
 
@@ -480,7 +498,7 @@ Unmount target partition
 - vmfinish - like finish but with root password deletion and grub bootloader installation.
 - vmstart - formats /dev/sda1 partition WITHOUT PROMPT and mout it on mount point **(DANGEROUS*)** 
 
-**(DANGEROUS)** - running this script cause /dev/sda1 formating therefore don't run this script on physical computer. 
+**(DANGEROUS)** - running this script cause /dev/sda1 formatting therefore don't run this script on physical computer.
 
 Scripts with "vm" prefix is intended to run only in virtual machine. Be careful!
 
@@ -507,3 +525,13 @@ In log directory you can found followed files:
 - last_script.files - count of files installed by previous script. If this file is contain "0", this means that error has occurred and further installation should be interrupted.
 - autobuild.start - Unix-timestamp of moment before running an automatic build script.
 - autobuild.end - Unix-timestamp of moment after running an automatic build script.
+
+## Documentation
+
+Builder documentation is stored in Markdown format.
+
+To convert documentation from Markdown to HTML format type:
+
+    make doc
+
+After conversion HTML files should appear in root directory of Builder.
