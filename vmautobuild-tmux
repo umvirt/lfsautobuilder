@@ -1,0 +1,5 @@
+#!/bin/sh
+tmux new-session -d './vmautomonitor'
+tmux split-window -h './vmautobuild'
+tmux -2 attach-session -d
+
