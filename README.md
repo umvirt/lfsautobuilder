@@ -143,6 +143,7 @@ In addition you also need followed software packages:
 - **tmux** - to run TMUX version of vmautobuild.
 - **git** - to get Builder source code.
 - **markdown** - to convert Builder documentation in HTML format.
+- **neofetch** - to save Builder system information in logs.
 
 ### Resource allocation for VM
 
@@ -483,6 +484,7 @@ Unmount target partition
 - env.sh - config file for some scripts.
 - finish - finish operations. */tmp* cleanup & free space zeroing.
 - initdirs - create dirs in target.
+- logenv - script for saving in logs information about system, Builder configuration and files integrity.
 - runchrootscripts - run all chroot scripts one by one (Stage 2).
 - runscripts - run lfs scripts one by one (Stage 1).
 - runscriptsbyroot - run *runscripts* script as root.

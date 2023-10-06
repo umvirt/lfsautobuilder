@@ -1,0 +1,20 @@
+#Dump system information
+
+if [ -f /usr/bin/neofetch ]
+then
+
+neofetch --stdout > log/sysinfo.log
+
+fi
+
+#Dump config.log
+
+./showconfig > log/config.log
+
+#Builder files integrity information
+
+#dump current commit
+git rev-parse HEAD > log/git_head.log
+
+#dump current diff 
+git diff -r > log/git_diff.log
