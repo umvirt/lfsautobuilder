@@ -8,23 +8,30 @@ seconds2time() {
 PWD=`pwd`
 TGTDIR="$PWD/builddir"
 LOGDIR="$PWD/log"
-ROM_FREE=`df -B M $TGTDIR --output=avail | tail -n 1`
 RAM_FREE="`free -m | grep Mem: | awk '{print $7};'`M"
-CURRENT_AUTOSCRIPT=`cat $LOGDIR/current_autoscript`
-CURRENT_SCRIPT=`cat $LOGDIR/current_script`
-AUTOSCRIPTS_COUNT=`cat $PWD/vmcmds.txt | wc -l`
-AUTOSCRIPTS_POSITION=`cat $PWD/vmcmds.txt | grep -B 1000 $CURRENT_AUTOSCRIPT | wc -l`
-AUTOSCRIPTS_PROGRESS=`echo "scale=2; ($AUTOSCRIPTS_POSITION/$AUTOSCRIPTS_COUNT)*100" | bc -l`
-
-
-NOW=`date +%s`
-AUTOBUILD_TIMESTART=`cat $LOGDIR/autobuild.start`
-AUTOBUILD_TIME=$(seconds2time $(($NOW-$AUTOBUILD_TIMESTART)) )
+DISK_FREE="`df -B M $TGTDIR --output=avail | tail -n 1`"
 
 
 echo "Umvirt LFS Auto Builder Monitor"
 echo "-------------------------------"
 echo ""
+
+
+NOW=`date +%s`
+
+if [ ! -f $LOGDIR/autobuild.start ]
+then
+
+echo "Waiting..."
+exit
+
+fi
+
+
+AUTOBUILD_TIMESTART=`cat $LOGDIR/autobuild.start`
+AUTOBUILD_TIME=$(seconds2time $(($NOW-$AUTOBUILD_TIMESTART)) )
+
+
 
 if [ -f $LOGDIR/autobuild.end ]
 then
@@ -38,9 +45,20 @@ fi
 
 
 echo "RAM: $RAM_FREE free"
-echo "ROM: $ROM_FREE free"
+echo "DISK: $DISK_FREE free"
 echo ""
 echo "Build time: $AUTOBUILD_TIME"
+
+
+#AUTOSCRIPT
+if [ -f $LOGDIR/current_autoscript ]
+then
+
+CURRENT_AUTOSCRIPT=`cat $LOGDIR/current_autoscript`
+AUTOSCRIPTS_COUNT=`cat $PWD/vmcmds.txt | wc -l`
+AUTOSCRIPTS_POSITION=`cat $PWD/vmcmds.txt | grep -B 1000 $CURRENT_AUTOSCRIPT | wc -l`
+AUTOSCRIPTS_PROGRESS=`echo "scale=2; ($AUTOSCRIPTS_POSITION/$AUTOSCRIPTS_COUNT)*100" | bc -l`
+
 if [[ $AUTOSCRIPTS_POSITION -gt 0 ]] ; then
 
 AUTOSCRIPTS_PROGRESS=`echo "scale=2; (($AUTOSCRIPTS_POSITION-1)/$AUTOSCRIPTS_COUNT)*100" | bc -l`
@@ -54,6 +72,8 @@ echo "-------"
 cat $PWD/vmcmds.txt | grep --color -B 5 -A 5 `cat log/current_autoscript`
 echo ""
 
+
+
 echo "Script: $CURRENT_AUTOSCRIPT"
 AUTOSCRIPT_TIMESTART=`cat $LOGDIR/_$CURRENT_AUTOSCRIPT.start`
 AUTOSCRIPT_TIME=$(seconds2time $(($NOW-$AUTOSCRIPT_TIMESTART)))
@@ -63,6 +83,11 @@ echo "Position: $AUTOSCRIPTS_POSITION/$AUTOSCRIPTS_COUNT"
 if [[ "$CURRENT_AUTOSCRIPT" == "runscriptsbyroot" ]]
 then
 
+
+if [ -f $LOGDIR/current_script ]
+then
+
+CURRENT_SCRIPT=`cat $LOGDIR/current_script`
 SCRIPTS_COUNT=`cd $PWD/scripts && ls | wc -l`
 SCRIPTS_POSITION=`cd $PWD/scripts && ls | grep -B 1000 $CURRENT_SCRIPT | wc -l`
 SCRIPTS_PROGRESS=`echo "scale=2; ($SCRIPTS_POSITION/$SCRIPTS_COUNT)*100" | bc -l`
@@ -89,9 +114,16 @@ echo "Position: $SCRIPTS_POSITION/$SCRIPTS_COUNT"
 
 fi
 
+fi
+
 if [[ "$CURRENT_AUTOSCRIPT" == "runchrootscripts" ]]
 then
 
+if [ -f $LOGDIR/current_script ]
+then
+
+
+CURRENT_SCRIPT=`cat $LOGDIR/current_script`
 SCRIPTS_COUNT=`cd $PWD/cscripts && ls | wc -l`
 SCRIPTS_POSITION=`cd $PWD/cscripts && ls | grep -B 1000 $CURRENT_SCRIPT | wc -l`
 SCRIPTS_PROGRESS=`echo "scale=2; ($SCRIPTS_POSITION/$SCRIPTS_COUNT)*100" | bc -l`
@@ -118,7 +150,10 @@ echo ""
 
 fi
 
+fi
 
+#AUTOSCRIPT
+fi
 
 
 echo ""
