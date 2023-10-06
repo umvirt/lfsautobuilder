@@ -1,6 +1,11 @@
 #!/usr/bin/env php
 <?php
 $logdir = "log";
+if(!file_exists("$logdir/autobuild.end")){
+echo "Error: Wrong log directory!\n";
+exit;
+}
+
 
 class ScriptLog {
     public $name;
@@ -26,6 +31,14 @@ if (is_dir($dir)) {
 
 return $res;
 }
+
+function seconds2time($time) {
+ $h=$time/3600;
+ $m=($time%3600)/60;
+ $s=$time%60;
+ return sprintf ("%02d:%02d:%02d", $h,$m,$s);
+}
+
 
 
 $_scripts1=fileslist('scripts');
@@ -63,12 +76,12 @@ echo "Scripts executed:\n";
 $c=0;
 foreach ($scripts as $script){
 $c++;
-echo $c."\t".$script->name."\t".$script->time."\t".$script->files."\n";
+echo $c."\t".str_pad($script->name,20)."\t".seconds2time($script->time)."\t".$script->files."\n";
 }
 
 echo "\n\n";
 
 echo "Scripts executed: ".count($scripts)."\n";
-echo "Total build time: ".$buildtime."\n";
+echo "Total build time: ".seconds2time($buildtime)."\n";
 
 
