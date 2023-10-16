@@ -2,7 +2,7 @@
 
 PWD=`pwd`
 LFS="$PWD/builddir"
-MAKEFLAGS='-j6'
+MAKEFLAGS="-j`nproc`"
 
 echo $LFS
 
