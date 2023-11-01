@@ -3,6 +3,7 @@
 PWD=`pwd`
 LFS="$PWD/builddir"
 MAKEFLAGS="-j`nproc`"
+PARTITION="sda1"
 
 echo $LFS
 
