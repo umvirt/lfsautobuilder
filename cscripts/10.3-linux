@@ -6,6 +6,11 @@ rm -rfv linux-6.4.12
 
 tar -xf linux-6.4.12.tar.xz
 
+if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
+then
+    cp -rv linux-6.4.12 /usr/src
+fi
+
 cd linux-6.4.12
 
 #FORCING ARCH 
