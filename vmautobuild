@@ -27,3 +27,7 @@ date +%s > log/_$s.end
 done
 
 date +%s > log/autobuild.end
+
+#copy build log
+mkdir -p builddir/var/log/lfsautobuilder
+cp -rv log/* builddir/var/log/lfsautobuilder
