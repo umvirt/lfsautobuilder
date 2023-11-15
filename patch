@@ -1,0 +1,46 @@
+index 7d5085b..66db880 100755
+--- a/cscripts.config/env.sh
++++ b/cscripts.config/env.sh
+@@ -3,12 +3,13 @@ PATH=/usr/bin:/usr/sbin
+ LC_ALL=POSIX
+ LFS_TGT=$(uname -m)-lfs-linux-gnu
+ LANG=C
+-export PATH LANG ULFS_TESTS ULFS_CRITICAL_TESTS ULFS_DOCS NINJAJOBS MAKEFLAGS LFS_TGT
++export PATH LANG ULFS_TESTS ULFS_CRITICAL_TESTS ULFS_DOCS ULFS_COPY_KERNEL_SOURCES NINJAJOBS MAKEFLAGS LFS_TGT
+ PWD=`pwd`
+ echo "PWD DIR: $PWD"
+ echo "RUN TESTS: $ULFS_TESTS"
+ echo "RUN CRITICAL TESTS: $ULFS_CRITICAL_TESTS"
+ echo "INSTALL DOCUMENTATION: $ULFS_DOCS"
++echo "COPY LINUX KERNEL SOURCES: $ULFS_COPY_KERNEL_SOURCES"
+ echo
+ echo "MAKE FLAGS: $MAKEFLAGS"
+ echo "NINJA THREADS: $NINJAJOBS"
+diff --git a/cscripts/10.3-linux b/cscripts/10.3-linux
+index ec13f3c..0a52f97 100755
+--- a/cscripts/10.3-linux
++++ b/cscripts/10.3-linux
+@@ -6,6 +6,11 @@ rm -rfv linux-6.4.12
+ 
+ tar -xf linux-6.4.12.tar.xz
+ 
++if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
++then
++    cp -rv linux-6.4.12 /usr/src
++fi
++
+ cd linux-6.4.12
+ 
+ #FORCING ARCH 
+diff --git a/vmautobuild b/vmautobuild
+index 4ada6f2..5816633 100755
+--- a/vmautobuild
++++ b/vmautobuild
+@@ -27,3 +27,7 @@ date +%s > log/_$s.end
+ done
+ 
+ date +%s > log/autobuild.end
++
++#copy build log
++mkdir -p builddir/var/log/lfsautobuilder
++cp -rv log/* builddir/var/log/lfsautobuilder

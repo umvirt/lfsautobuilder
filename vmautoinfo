@@ -69,7 +69,7 @@ echo "Build progress: $AUTOSCRIPTS_PROGRESS%"
 echo ""
 echo "1-Level" 
 echo "-------"
-cat $PWD/vmcmds.txt | grep --color -B 5 -A 5 `cat log/current_autoscript`
+cat $PWD/vmcmds.txt | grep --color -B 3 -A 3 `cat log/current_autoscript`
 echo ""
 
 
@@ -102,7 +102,7 @@ echo "Progress: $SCRIPTS_PROGRESS%"
 echo ""
 echo "2-Level"
 echo "-------"
-ls scripts | grep --color -B 5 -A 5 `cat log/current_script`
+ls scripts | grep --color -B 3 -A 3 `cat log/current_script`
 echo ""
 
 echo "Script: $CURRENT_SCRIPT"
@@ -138,7 +138,7 @@ echo "Progress: $SCRIPTS_PROGRESS%"
 echo ""
 echo "2-Level"
 echo "-------"
-ls cscripts | grep --color -B 5 -A 5 `cat log/current_script`
+ls cscripts | grep --color -B 3 -A 3 `cat log/current_script`
 echo ""
 
 echo "Script: $CURRENT_SCRIPT"
