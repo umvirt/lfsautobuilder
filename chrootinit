@@ -10,7 +10,7 @@ esac
 #create directories
 mkdir -pv $LFS/{dev,proc,sys,run}
 
-#create subdirectories
+#create subdirectories (modified Chapter 7.5)
 
 mkdir -pv $LFS/{boot,home,mnt,opt,srv}
 
@@ -25,8 +25,8 @@ mkdir -pv $LFS/usr/{,local/}share/man/man{1..8}
 mkdir -pv $LFS/var/{cache,local,log,mail,opt,spool}
 mkdir -pv $LFS/var/lib/{color,misc,locate}
 
-ln -sfv $LFS/run /var/run
-ln -sfv $LFS/run/lock /var/lock
+ln -sfv /run $LFS/var/run
+ln -sfv /run/lock $LFS/var/lock
 
 install -dv -m 0750 $LFS/root
 install -dv -m 1777 $LFS/tmp /var/tmp
