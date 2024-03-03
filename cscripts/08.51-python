@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf Python-3.11.4.tar.xz
+tar -xf Python-3.12.2.tar.xz
 
-cd Python-3.11.4
+cd Python-3.12.2
 
 ./configure --prefix=/usr        \
             --enable-shared      \
@@ -27,12 +27,12 @@ EOF
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
 
-install -v -dm755 /usr/share/doc/python-3.11.4/html
+install -v -dm755 /usr/share/doc/python-3.12.2/html
 
-tar --strip-components=1  \
-    --no-same-owner       \
-    --no-same-permissions \
-    -C /usr/share/doc/python-3.11.4/html \
-    -xvf ../python-3.11.4-docs-html.tar.bz2
-    
+tar --no-same-owner \
+    -xvf ../python-3.12.2-docs-html.tar.bz2
+cp -R --no-preserve=mode python-3.12.2-docs-html/* \
+    /usr/share/doc/python-3.12.2/html
+
+
 fi

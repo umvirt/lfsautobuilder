@@ -1,10 +1,10 @@
 cd $LFS/sources
 
-rm -rfv binutils-2.41
+rm -rfv binutils-2.42
 
-tar -xf binutils-2.41.tar.xz
+tar -xf binutils-2.42.tar.xz
 
-cd binutils-2.41
+cd binutils-2.42
 
 
 sed '6009s/$add_dir//' -i ltmain.sh
@@ -20,7 +20,8 @@ cd       build
     --enable-shared            \
     --enable-gprofng=no        \
     --disable-werror           \
-    --enable-64-bit-bfd
+    --enable-64-bit-bfd        \
+    --enable-default-hash-style=gnu
 
 make
 

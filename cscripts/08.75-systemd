@@ -2,13 +2,15 @@
 
 cd /sources
 
-tar -xf systemd-254.tar.gz
+tar -xf systemd-255.tar.gz
 
-cd systemd-254
+cd systemd-255
 
 
 sed -i -e 's/GROUP="render"/GROUP="video"/' \
        -e 's/GROUP="sgx", //' rules.d/50-udev-default.rules.in
+
+patch -Np1 -i ../systemd-255-upstream_fixes-1.patch
 
 mkdir -p build
 cd       build
@@ -22,30 +24,27 @@ meson setup \
       -Dldconfig=false              \
       -Dsysusers=false              \
       -Drpmmacrosdir=no             \
-      -Dhomed=false                 \
+      -Dhomed=disabled              \
       -Duserdb=false                \
-      -Dman=false                   \
+      -Dman=disabled                \
       -Dmode=release                \
       -Dpamconfdir=no               \
       -Ddev-kvm-mode=0660           \
-      -Ddocdir=/usr/share/doc/systemd-254 \
+      -Dnobody-group=nogroup        \
+      -Dsysupdate=disabled          \
+      -Dukify=disabled              \
+      -Ddocdir=/usr/share/doc/systemd-255 \
       ..
 
 ninja
 
-./configure --prefix=/usr
-
-make
-
 ninja install
 
-tar -xf ../../systemd-man-pages-254.tar.xz \
+tar -xf ../../systemd-man-pages-255.tar.xz \
     --no-same-owner --strip-components=1   \
     -C /usr/share/man
 
 systemd-machine-id-setup
 
 systemctl preset-all
-
-systemctl disable systemd-sysupdate{,-reboot}
 

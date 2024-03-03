@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf kmod-30.tar.xz
+tar -xf kmod-31.tar.xz
 
-cd kmod-30
+cd kmod-31
 
 ./configure --prefix=/usr          \
             --sysconfdir=/etc      \

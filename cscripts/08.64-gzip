@@ -2,9 +2,11 @@
 
 cd /sources
 
-tar -xf texinfo-7.0.3.tar.xz
+rm -rfv gzip-1.13
 
-cd texinfo-7.0.3
+tar -xf gzip-1.13.tar.xz
+
+cd gzip-1.13
 
 ./configure --prefix=/usr
 
@@ -18,5 +20,3 @@ make check
 fi
 
 make install
-#make TEXMF=/usr/share/texmf install-tex
-

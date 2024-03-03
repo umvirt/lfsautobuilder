@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf gzip-1.12.tar.xz
+tar -xf gzip-1.13.tar.xz
 
-cd gzip-1.12
+cd gzip-1.13
 
 ./configure --prefix=/usr --host=$LFS_TGT
 

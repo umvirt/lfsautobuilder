@@ -2,13 +2,16 @@
 
 cd /sources
 
-rm -rfv coreutils-9.3
+rm -rfv coreutils-9.4
 
-tar -xf coreutils-9.3.tar.xz
+tar -xf coreutils-9.4.tar.xz
 
-cd coreutils-9.3
+cd coreutils-9.4
 
-patch -Np1 -i ../coreutils-9.3-i18n-1.patch
+patch -Np1 -i ../coreutils-9.4-i18n-1.patch
+
+sed -e '/n_out += n_hold/,+4 s|.*bufsize.*|//&|' \
+    -i src/split.c
 
 #bugfix: forcing environmnt variable. passing variable to configure don't work correctly.
 export FORCE_UNSAFE_CONFIGURE=1

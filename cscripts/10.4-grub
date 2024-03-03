@@ -1,8 +1,8 @@
 grub-install /dev/sda
 
-cd /tmp
-grub-mkrescue --output=grub-img.iso
-xorriso -as cdrecord -v dev=/dev/cdrw blank=as_needed grub-img.iso
+#cd /tmp
+#grub-mkrescue --output=grub-img.iso
+#xorriso -as cdrecord -v dev=/dev/cdrw blank=as_needed grub-img.iso
 
 
 cat > /boot/grub/grub.cfg << "EOF"
@@ -14,7 +14,7 @@ insmod part_gpt
 insmod ext2
 set root=(hd0,1)
 
-menuentry "GNU/Linux, Linux 6.4.12-lfs-12.0-systemd" {
-        linux   /boot/vmlinuz-6.4.12-lfs-12.0-systemd root=/dev/sda1 ro
+menuentry "GNU/Linux, Linux 6.7.4-lfs-12.1-systemd" {
+        linux   /boot/vmlinuz-6.7.4-lfs-12.1-systemd root=/dev/sda1 ro
 }
 EOF

@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf openssl-3.1.2.tar.gz
+tar -xf openssl-3.2.1.tar.gz
 
-cd openssl-3.1.2
+cd openssl-3.2.1
 
 #FORCING ARCH
 ARCH=""
@@ -53,11 +53,11 @@ fi
 sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
 make MANSUFFIX=ssl install
 
-mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.1.2
+mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.2.1
 
 
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
-cp -vfr doc/* /usr/share/doc/openssl-3.1.2
+cp -vfr doc/* /usr/share/doc/openssl-3.2.1
 fi
 

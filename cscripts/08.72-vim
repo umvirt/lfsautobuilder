@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf vim-9.0.1677.tar.gz
+tar -xf vim-9.1.0041.tar.gz
 
-cd vim-9.0.1677
+cd vim-9.1.0041
 
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
@@ -15,9 +15,10 @@ make
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-chown -Rv tester .
+chown -R tester .
 
-su tester -c "LANG=en_US.UTF-8 make -j1 test" &> vim-test.log
+su tester -c "TERM=xterm-256color LANG=en_US.UTF-8 make -j1 test" \
+   &> vim-test.log
 
 fi
 
@@ -30,7 +31,8 @@ for L in  /usr/share/man/{,*/}man1/vim.1; do
 done
 
 
-ln -sv ../vim/vim90/doc /usr/share/doc/vim-9.0.1677
+ln -sv ../vim/vim91/doc /usr/share/doc/vim-9.1.0041
+
 
 cat > /etc/vimrc << "EOF"
 " Begin /etc/vimrc

@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf perl-5.38.0.tar.xz
+tar -xf perl-5.38.2.tar.xz
 
-cd perl-5.38.0
+cd perl-5.38.2
 
 sh Configure -des                                        \
              -Dprefix=/usr                               \

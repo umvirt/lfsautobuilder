@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf man-pages-6.05.01.tar.xz
+tar -xf man-pages-6.06.tar.xz
 
-cd man-pages-6.05.01
+cd man-pages-6.06
 
 rm -v man3/crypt*
 

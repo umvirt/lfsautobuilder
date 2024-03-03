@@ -14,7 +14,7 @@ make
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-make -j4 check
+make -j$(($(nproc)>4?$(nproc):4)) check
 
 fi
 

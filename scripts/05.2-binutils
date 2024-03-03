@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf binutils-2.41.tar.xz
+tar -xf binutils-2.42.tar.xz
 
-cd binutils-2.41
+cd binutils-2.42
 
 mkdir -v build
 cd       build
@@ -11,7 +11,8 @@ cd       build
              --target=$LFS_TGT   \
              --disable-nls       \
              --enable-gprofng=no \
-             --disable-werror
+             --disable-werror    \
+             --enable-default-hash-style=gnu
 
 
 make

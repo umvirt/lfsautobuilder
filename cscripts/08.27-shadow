@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf shadow-4.13.tar.xz
+tar -xf shadow-4.14.5.tar.xz
 
-cd shadow-4.13
+cd shadow-4.14.5
 
 
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
@@ -22,8 +22,8 @@ touch /usr/bin/passwd
 ./configure --sysconfdir=/etc   \
             --disable-static    \
             --with-{b,yes}crypt \
+            --without-libbsd    \
             --with-group-name-max-length=32
-
 
 make
 

@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf perl-5.38.0.tar.xz
+tar -xf perl-5.38.2.tar.xz
 
-cd perl-5.38.0
+cd perl-5.38.2
 
 export BUILD_ZLIB=False
 export BUILD_BZIP2=0
@@ -31,7 +31,7 @@ make
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-make test
+TEST_JOBS=$(nproc) make test_harness
 
 fi
 

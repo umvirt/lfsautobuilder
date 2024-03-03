@@ -2,16 +2,15 @@
 
 cd /sources
 
-rm -rfv xz-5.4.4
+rm -rfv xz-5.4.6
 
-tar -xf xz-5.4.4.tar.xz
+tar -xf xz-5.4.6.tar.xz
 
-cd xz-5.4.4
+cd xz-5.4.6
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/xz-5.4.4
-
+            --docdir=/usr/share/doc/xz-5.4.6
 make
 
 if [[ "$ULFS_TESTS" == "YES" ]]

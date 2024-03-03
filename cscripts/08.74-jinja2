@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf Jinja2-3.1.2.tar.gz
+tar -xf Jinja2-3.1.3.tar.gz
 
-cd Jinja2-3.1.2
+cd Jinja2-3.1.3
 
 pip3 wheel -w dist --no-build-isolation --no-deps $PWD
 

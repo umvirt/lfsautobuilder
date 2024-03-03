@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf ncurses-6.4.tar.gz
+tar -xf ncurses-6.4-20230520.tar.xz
 
-cd ncurses-6.4
+cd ncurses-6.4-20230520
 
 sed -i s/mawk// configure
 
@@ -28,4 +28,6 @@ popd
 make
 
 make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install
-echo "INPUT(-lncursesw)" > $LFS/usr/lib/libncurses.so
+ln -sv libncursesw.so $LFS/usr/lib/libncurses.so
+sed -e 's/^#if.*XOPEN.*$/#if 1/' \
+    -i $LFS/usr/include/curses.h

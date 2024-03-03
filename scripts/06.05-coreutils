@@ -1,14 +1,13 @@
 cd $LFS/sources
-tar -xf coreutils-9.3.tar.xz
+tar -xf coreutils-9.4.tar.xz
 
-cd coreutils-9.3
+cd coreutils-9.4
 
 ./configure --prefix=/usr                     \
             --host=$LFS_TGT                   \
             --build=$(build-aux/config.guess) \
             --enable-install-program=hostname \
-            --enable-no-install-program=kill,uptime \
-            gl_cv_macro_MB_CUR_MAX_good=y
+            --enable-no-install-program=kill,uptime 
 
 make
 

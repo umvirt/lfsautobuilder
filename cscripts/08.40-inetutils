@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf inetutils-2.4.tar.xz
+tar -xf inetutils-2.5.tar.xz
 
-cd inetutils-2.4
+cd inetutils-2.5
 
 ./configure --prefix=/usr        \
             --bindir=/usr/bin    \

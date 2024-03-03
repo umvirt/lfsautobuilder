@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf gawk-5.2.2.tar.xz
+tar -xf gawk-5.3.0.tar.xz
 
-cd gawk-5.2.2
+cd gawk-5.3.0
 
 sed -i 's/extras//' Makefile.in
 

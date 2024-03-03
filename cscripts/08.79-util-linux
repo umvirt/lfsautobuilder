@@ -2,14 +2,13 @@
 
 cd /sources
 
-tar -xf util-linux-2.39.1.tar.xz
+tar -xf util-linux-2.39.3.tar.xz
 
-cd util-linux-2.39.1
+cd util-linux-2.39.3
 
 sed -i '/test_mkfds/s/^/#/' tests/helpers/Makemodule.am
 
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
-            --bindir=/usr/bin    \
+./configure --bindir=/usr/bin    \
             --libdir=/usr/lib    \
             --runstatedir=/run   \
             --sbindir=/usr/sbin  \
@@ -22,8 +21,8 @@ sed -i '/test_mkfds/s/^/#/' tests/helpers/Makemodule.am
             --disable-pylibmount \
             --disable-static     \
             --without-python     \
-            --docdir=/usr/share/doc/util-linux-2.39.1
-
+            ADJTIME_PATH=/var/lib/hwclock/adjtime \
+            --docdir=/usr/share/doc/util-linux-2.39.3
 make
 
 make install
