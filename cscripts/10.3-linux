@@ -2,16 +2,16 @@
 
 cd /sources
 
-rm -rfv linux-6.7.4
+rm -rfv linux-6.10.5
 
-tar -xf linux-6.7.4.tar.xz
+tar -xf linux-6.10.5.tar.xz
 
 if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
 then
-    cp -rv linux-6.7.4 /usr/src
+    cp -rv linux-6.10.5 /usr/src
 fi
 
-cd linux-6.7.4
+cd linux-6.10.5
 
 #FORCING ARCH 
 ARCH=""
@@ -53,13 +53,13 @@ cat kernelbuilder
 
 ./kernelbuilder
 
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.7.4-lfs-12.1-systemd
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.10.5-lfs-12.2-systemd
 
-cp -iv System.map /boot/System.map-6.7.4
+cp -iv System.map /boot/System.map-6.10.5
 
-cp -iv .config /boot/config-6.7.4
+cp -iv .config /boot/config-6.10.5
 
-#cp -r Documentation -T /usr/share/doc/linux-6.7.4
+#cp -r Documentation -T /usr/share/doc/linux-6.10.5
 
 install -v -m755 -d /etc/modprobe.d
 cat > /etc/modprobe.d/usb.conf << "EOF"

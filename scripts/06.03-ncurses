@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf ncurses-6.4-20230520.tar.xz
+tar -xf ncurses-6.5.tar.gz
 
-cd ncurses-6.4-20230520
+cd ncurses-6.5
 
 sed -i s/mawk// configure
 
@@ -22,9 +22,7 @@ popd
             --with-cxx-shared            \
             --without-debug              \
             --without-ada                \
-            --disable-stripping          \
-            --enable-widec
-
+            --disable-stripping
 make
 
 make DESTDIR=$LFS TIC_PATH=$(pwd)/build/progs/tic install

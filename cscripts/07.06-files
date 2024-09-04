@@ -41,7 +41,6 @@ dialout:x:10:
 audio:x:11:
 video:x:12:
 utmp:x:13:
-usb:x:14:
 cdrom:x:15:
 adm:x:16:
 messagebus:x:18:
@@ -62,6 +61,8 @@ wheel:x:97:
 users:x:999:
 nogroup:x:65534:
 EOF
+
+localedef -i C -f UTF-8 C.UTF-8
 
 echo "tester:x:101:101::/home/tester:/bin/bash" >> /etc/passwd
 echo "tester:x:101:" >> /etc/group

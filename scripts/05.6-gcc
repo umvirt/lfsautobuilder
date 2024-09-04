@@ -1,10 +1,10 @@
 cd $LFS/sources
 
-rm -rfv gcc-13.2.0
+rm -rfv gcc-14.2.0
 
-tar -xf gcc-13.2.0.tar.xz
+tar -xf gcc-14.2.0.tar.xz
 
-cd gcc-13.2.0
+cd gcc-14.2.0
 
 mkdir -v build
 cd       build
@@ -16,7 +16,7 @@ cd       build
     --disable-multilib              \
     --disable-nls                   \
     --disable-libstdcxx-pch         \
-    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/13.2.0
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/14.2.0
 
 make
 

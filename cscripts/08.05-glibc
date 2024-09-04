@@ -2,14 +2,14 @@
 
 cd /sources
 
-rm -rfv glibc-2.39
+rm -rfv glibc-2.40
 
 
-tar -xf glibc-2.39.tar.xz
+tar -xf glibc-2.40.tar.xz
 
-cd glibc-2.39
+cd glibc-2.40
 
-patch -Np1 -i ../glibc-2.39-fhs-1.patch
+patch -Np1 -i ../glibc-2.40-fhs-1.patch
 
 mkdir -v build
 cd       build
@@ -41,7 +41,6 @@ make install
 
 sed '/RTLDLIST=/s@/usr@@g' -i /usr/bin/ldd
 
-mkdir -pv /usr/lib/locale
 localedef -i C -f UTF-8 C.UTF-8
 localedef -i cs_CZ -f UTF-8 cs_CZ.UTF-8
 localedef -i de_DE -f ISO-8859-1 de_DE

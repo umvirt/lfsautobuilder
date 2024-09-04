@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf binutils-2.42.tar.xz
+tar -xf binutils-2.43.1.tar.xz
 
-cd binutils-2.42
+cd binutils-2.43.1
 
 mkdir -v build
 cd       build
@@ -12,6 +12,7 @@ cd       build
              --disable-nls       \
              --enable-gprofng=no \
              --disable-werror    \
+             --enable-new-dtags  \
              --enable-default-hash-style=gnu
 
 
