@@ -1,5 +1,14 @@
 . /cscripts/env.sh
 
+#BUGFIX 
+#description: build error: 'PERL_LC_ALL_CATEGORY_POSITIONS_INIT' undeclared
+#solution: https://bugs.gentoo.org/939014
+mkdir -pv /usr/lib/locale
+localedef -i C -f UTF-8 C.UTF-8
+export LANG=C.utf8
+#debug
+locale -a
+
 cd /sources
 
 tar -xf perl-5.40.0.tar.xz

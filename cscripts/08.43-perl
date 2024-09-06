@@ -1,5 +1,9 @@
 . /cscripts/env.sh
 
+#BUGFIX
+#debug
+locale -a
+
 cd /sources
 
 tar -xf perl-5.40.0.tar.xz
