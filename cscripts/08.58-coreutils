@@ -8,9 +8,15 @@ tar -xf coreutils-9.5.tar.xz
 
 cd coreutils-9.5
 
-patch -Np1 -i ../coreutils-9.5-i18n-2.patch
+#BUGFIX
+#patch -Np1 -i ../coreutils-9.5-i18n-2.patch
+
+ln -s aclocal /usr/bin/aclocal-1.16
+ln -s automake /usr/bin/automake-1.16
+
 
 autoreconf -fiv
+export FORCE_UNSAFE_CONFIGURE=1
 FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
             --enable-no-install-program=kill,uptime
