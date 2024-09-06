@@ -10,8 +10,6 @@ cd systemd-256.4
 sed -i -e 's/GROUP="render"/GROUP="video"/' \
        -e 's/GROUP="sgx", //' rules.d/50-udev-default.rules.in
 
-patch -Np1 -i ../systemd-255-upstream_fixes-1.patch
-
 mkdir -p build
 cd       build
 
