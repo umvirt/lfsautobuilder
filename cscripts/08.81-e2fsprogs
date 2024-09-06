@@ -4,7 +4,7 @@ cd /sources
 
 tar -xf e2fsprogs-1.47.1.tar.gz
 
-cd e2fsprogs-1.47.1.tar.gz
+cd e2fsprogs-1.47.1
 
 mkdir -v build
 cd       build
