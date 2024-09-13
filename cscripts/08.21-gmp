@@ -23,11 +23,13 @@ ABI="ABI=32"
 
 fi
 
-
-$ABI ./configure --prefix=/usr    \
+echo "echo $LFS_TGT" > config.sh
+echo "$ABI ./configure --prefix=/usr    \
             --enable-cxx     \
             --disable-static \
-            --docdir=/usr/share/doc/gmp-6.3.0
+            --docdir=/usr/share/doc/gmp-6.3.0" >> config.sh
+
+bash config.sh
 
 make
 
