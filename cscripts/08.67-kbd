@@ -2,11 +2,11 @@
 
 cd /sources
 
-tar -xf kbd-2.6.4.tar.xz
+tar -xf kbd-2.7.1.tar.xz
 
-cd kbd-2.6.4
+cd kbd-2.7.1
 
-patch -Np1 -i ../kbd-2.6.4-backspace-1.patch
+patch -Np1 -i ../kbd-2.7.1-backspace-1.patch
 
 sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
 sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
@@ -24,4 +24,9 @@ fi
 
 make install
 
-cp -R -v docs/doc -T /usr/share/doc/kbd-2.6.4
+if [[ "$ULFS_DOCS" == "YES" ]]
+then
+
+cp -R -v docs/doc -T /usr/share/doc/kbd-2.7.1
+
+fi

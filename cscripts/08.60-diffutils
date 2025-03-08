@@ -2,11 +2,11 @@
 
 cd /sources
 
-rm -rfv diffutils-3.10
+rm -rfv diffutils-3.11
 
-tar -xf diffutils-3.10.tar.xz
+tar -xf diffutils-3.11.tar.xz
 
-cd diffutils-3.10
+cd diffutils-3.11
 
 ./configure --prefix=/usr
 

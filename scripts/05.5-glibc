@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf glibc-2.40.tar.xz
+tar -xf glibc-2.41.tar.xz
 
-cd glibc-2.40
+cd glibc-2.41
 
 #case $(uname -m) in
 #    i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
@@ -11,12 +11,20 @@ cd glibc-2.40
 #    ;;
 #esac
 
+if [[ "$LFS_TGT" == "i586-lfs-linux-gnu" ]]
+then
+
+ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
+
+fi
+
 if [[ "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
 then
 
 ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
 
 fi
+
 
 if [[ "$LFS_TGT" == "x86_64-lfs-linux-gnu" ]]
 then
@@ -26,7 +34,7 @@ ln -sfv ../lib/ld-linux-x86-64.so.2 $LFS/lib64/ld-lsb-x86-64.so.3
 
 fi
 
-patch -Np1 -i ../glibc-2.40-fhs-1.patch
+patch -Np1 -i ../glibc-2.41-fhs-1.patch
 
 mkdir -v build
 cd       build
@@ -37,7 +45,7 @@ echo "rootsbindir=/usr/sbin" > configparms
       --prefix=/usr                      \
       --host=$LFS_TGT                    \
       --build=$(../scripts/config.guess) \
-      --enable-kernel=4.19               \
+      --enable-kernel=5.4                \
       --with-headers=$LFS/usr/include    \
       --disable-nscd                     \
       libc_cv_slibdir=/usr/lib

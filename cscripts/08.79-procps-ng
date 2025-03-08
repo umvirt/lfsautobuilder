@@ -2,22 +2,22 @@
 
 cd /sources
 
-tar -xf procps-ng-4.0.4.tar.xz
+tar -xf procps-ng-4.0.5.tar.xz
 
-cd procps-ng-4.0.4
+cd procps-ng-4.0.5
 
 ./configure --prefix=/usr                           \
-            --docdir=/usr/share/doc/procps-ng-4.0.4 \
+            --docdir=/usr/share/doc/procps-ng-4.0.5 \
             --disable-static                        \
             --disable-kill                          \
+            --enable-watch8bit                      \
             --with-systemd
-
-make src_w_LDADD='$(LDADD) -lsystemd'
 
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-make -k check
+chown -R tester .
+su tester -c "PATH=$PATH make check"
 
 fi
 

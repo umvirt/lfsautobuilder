@@ -2,14 +2,14 @@
 
 cd /sources
 
-rm -rfv glibc-2.40
+rm -rfv glibc-2.41
 
 
-tar -xf glibc-2.40.tar.xz
+tar -xf glibc-2.41.tar.xz
 
-cd glibc-2.40
+cd glibc-2.41
 
-patch -Np1 -i ../glibc-2.40-fhs-1.patch
+patch -Np1 -i ../glibc-2.41-fhs-1.patch
 
 mkdir -v build
 cd       build
@@ -19,7 +19,7 @@ echo "rootsbindir=/usr/sbin" > configparms
 
 ../configure --prefix=/usr                            \
              --disable-werror                         \
-             --enable-kernel=4.19                     \
+             --enable-kernel=5.4                      \
              --enable-stack-protector=strong          \
              --disable-nscd                           \
              libc_cv_slibdir=/usr/lib
@@ -78,7 +78,6 @@ localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
 localedef -i zh_TW -f UTF-8 zh_TW.UTF-8
 
 
-
 cat > /etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
 
@@ -97,7 +96,7 @@ rpc: files
 # End /etc/nsswitch.conf
 EOF
 
-tar -xf ../../tzdata2024a.tar.gz
+tar -xf ../../tzdata2025a.tar.gz
 
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}
@@ -111,7 +110,7 @@ done
 
 cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
 zic -d $ZONEINFO -p America/New_York
-unset ZONEINFO
+unset ZONEINFO tz
 
 cat > /etc/ld.so.conf << "EOF"
 # Begin /etc/ld.so.conf

@@ -1,4 +1,4 @@
-rm -rf /tmp/*
+rm -rf /tmp/{*,.*}
 
 find /usr/lib /usr/libexec -name \*.la -delete
 

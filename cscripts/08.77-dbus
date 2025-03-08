@@ -2,31 +2,25 @@
 
 cd /sources
 
-tar -xf dbus-1.14.10.tar.xz
+tar -xf dbus-1.16.0.tar.xz
 
-cd dbus-1.14.10
+cd dbus-1.16.0
 
-./configure --prefix=/usr                        \
-            --sysconfdir=/etc                    \
-            --localstatedir=/var                 \
-            --runstatedir=/run                   \
-            --enable-user-session                \
-            --disable-static                     \
-            --disable-doxygen-docs               \
-            --disable-xml-docs                   \
-            --docdir=/usr/share/doc/dbus-1.14.10 \
-            --with-system-socket=/run/dbus/system_bus_socket
+mkdir build
+cd    build
 
-make
+meson setup --prefix=/usr --buildtype=release --wrap-mode=nofallback ..
+
+ninja 
 
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-make check
+ninja test
 
 fi
 
-make install
+ninja install
 
 ln -sfv /etc/machine-id /var/lib/dbus
 

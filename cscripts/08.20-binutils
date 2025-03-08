@@ -2,11 +2,11 @@
 
 cd /sources
 
-rm -rfv binutils-2.43.1
+rm -rfv binutils-2.44
 
-tar -xf binutils-2.43.1.tar.xz
+tar -xf binutils-2.44.tar.xz
 
-cd binutils-2.43.1
+cd binutils-2.44
 
 
 mkdir -v build
@@ -37,4 +37,5 @@ fi
 
 make tooldir=/usr install
 
-rm -fv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a
+rm -rfv /usr/lib/lib{bfd,ctf,ctf-nobfd,gprofng,opcodes,sframe}.a \
+        /usr/share/doc/gprofng/

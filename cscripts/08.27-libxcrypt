@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf libxcrypt-4.4.36.tar.xz
+tar -xf libxcrypt-4.4.38.tar.xz
 
-cd libxcrypt-4.4.36
+cd libxcrypt-4.4.38
 
 ./configure --prefix=/usr                \
             --enable-hashes=strong,glibc \

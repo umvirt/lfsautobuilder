@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf vim-9.1.0660.tar.gz
+tar -xf vim-9.1.1166.tar.gz
 
-cd vim-9.1.0660
+cd vim-9.1.1166
 
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
@@ -31,7 +31,7 @@ for L in  /usr/share/man/{,*/}man1/vim.1; do
 done
 
 
-ln -sv ../vim/vim91/doc /usr/share/doc/vim-9.1.0660
+ln -sv ../vim/vim91/doc /usr/share/doc/vim-9.1.1166
 
 cat > /etc/vimrc << "EOF"
 " Begin /etc/vimrc

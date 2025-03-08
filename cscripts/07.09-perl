@@ -11,9 +11,9 @@ locale -a
 
 cd /sources
 
-tar -xf perl-5.40.0.tar.xz
+tar -xf perl-5.40.1.tar.xz
 
-cd perl-5.40.0
+cd perl-5.40.1
 
 sh Configure -des                                         \
              -D prefix=/usr                               \

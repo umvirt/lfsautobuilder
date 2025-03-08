@@ -2,11 +2,11 @@
 
 cd /sources
 
-tar -xf man-pages-6.9.1.tar.xz
+tar -xf man-pages-6.12.tar.xz
 
-cd man-pages-6.9.1
+cd man-pages-6.12
 
 rm -v man3/crypt*
 
-make prefix=/usr install
+make -R GIT=false prefix=/usr install
 

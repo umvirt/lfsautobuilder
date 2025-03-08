@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf MarkupSafe-2.1.5.tar.gz
+tar -xf markupsafe-3.0.2.tar.gz
 
-cd MarkupSafe-2.1.5
+cd markupsafe-3.0.2
 
 pip3 wheel -w dist --no-build-isolation --no-deps $PWD
 

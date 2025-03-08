@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf systemd-256.4.tar.gz
+tar -xf systemd-257.3.tar.gz
 
-cd systemd-256.4
+cd systemd-257.3
 
 
 sed -i -e 's/GROUP="render"/GROUP="video"/' \
@@ -12,7 +12,6 @@ sed -i -e 's/GROUP="render"/GROUP="video"/' \
 
 mkdir -p build
 cd       build
-
 
 meson setup ..                \
       --prefix=/usr           \
@@ -32,7 +31,7 @@ meson setup ..                \
       -D nobody-group=nogroup \
       -D sysupdate=disabled   \
       -D ukify=disabled       \
-      -D docdir=/usr/share/doc/systemd-256.4
+      -D docdir=/usr/share/doc/systemd-257.3
 
 ninja
 
@@ -46,7 +45,7 @@ fi
 
 ninja install
 
-tar -xf ../../systemd-man-pages-256.4.tar.xz \
+tar -xf ../../systemd-man-pages-257.3.tar.xz \
     --no-same-owner --strip-components=1   \
     -C /usr/share/man
 

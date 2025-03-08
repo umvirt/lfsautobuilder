@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf elfutils-0.191.tar.bz2
+tar -xf elfutils-0.192.tar.bz2
 
-cd elfutils-0.191
+cd elfutils-0.192
 
 ./configure --prefix=/usr                \
             --disable-debuginfod         \

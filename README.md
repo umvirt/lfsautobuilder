@@ -1,6 +1,6 @@
 # Umvirt LFS Auto Builder
 
-LFS Version: 12.2-systemd
+LFS Version: 12.3-systemd
 
 License: GPL
 

@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf texinfo-7.1.tar.xz
+tar -xf texinfo-7.2.tar.xz
 
-cd texinfo-7.1
+cd texinfo-7.2
 
 
 ./configure --prefix=/usr

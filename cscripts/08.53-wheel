@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf wheel-0.44.0.tar.gz
+tar -xf wheel-0.45.1.tar.gz
 
-cd wheel-0.44.0
+cd wheel-0.45.1
 
 pip3 wheel -w dist --no-build-isolation --no-deps $PWD
 

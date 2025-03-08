@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf meson-1.5.1.tar.gz
+tar -xf meson-1.7.0.tar.gz
 
-cd meson-1.5.1
+cd meson-1.7.0
 
 pip3 wheel -w dist --no-build-isolation --no-deps $PWD
 

@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf inetutils-2.5.tar.xz
+tar -xf inetutils-2.6.tar.xz
 
-cd inetutils-2.5
+cd inetutils-2.6
 
 sed -i 's/def HAVE_TERMCAP_TGETENT/ 1/' telnet/telnet.c
 

@@ -13,7 +13,7 @@ sed -i '/int Guess/a \
   if ( j > 0 ) return j;\
 ' src/ninja.cc
 
-python3 configure.py --bootstrap
+python3 configure.py --bootstrap --verbose
 
 install -vm755 ninja /usr/bin/
 install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja

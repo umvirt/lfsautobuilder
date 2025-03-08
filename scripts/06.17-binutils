@@ -1,13 +1,13 @@
 cd $LFS/sources
 
-rm -rfv binutils-2.43.1
+rm -rfv binutils-2.44
 
-tar -xf binutils-2.43.1.tar.xz
+tar -xf binutils-2.44.tar.xz
 
-cd binutils-2.43.1
+cd binutils-2.44
 
 
-sed '6009s/$add_dir//' -i ltmain.sh
+sed '6031s/$add_dir//' -i ltmain.sh
 
 mkdir -v build
 cd       build

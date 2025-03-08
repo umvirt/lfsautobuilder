@@ -3,8 +3,6 @@ tar -xf ncurses-6.5.tar.gz
 
 cd ncurses-6.5
 
-sed -i s/mawk// configure
-
 mkdir build
 pushd build
   ../configure

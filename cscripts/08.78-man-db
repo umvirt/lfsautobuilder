@@ -2,12 +2,12 @@
 
 cd /sources
 
-tar -xf man-db-2.12.1.tar.xz
+tar -xf man-db-2.13.0.tar.xz
 
-cd man-db-2.12.1
+cd man-db-2.13.0
 
 ./configure --prefix=/usr                         \
-            --docdir=/usr/share/doc/man-db-2.12.1 \
+            --docdir=/usr/share/doc/man-db-2.13.0 \
             --sysconfdir=/etc                     \
             --disable-setuid                      \
             --enable-cache-owner=bin              \

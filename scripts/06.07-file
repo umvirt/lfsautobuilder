@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf file-5.45.tar.gz
+tar -xf file-5.46.tar.gz
 
-cd file-5.45
+cd file-5.46
 
 
 mkdir build

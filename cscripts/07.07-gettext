@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf gettext-0.22.5.tar.xz
+tar -xf gettext-0.24.tar.xz
 
-cd gettext-0.22.5
+cd gettext-0.24
 
 ./configure --disable-shared
 
