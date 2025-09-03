@@ -2,11 +2,11 @@
 
 cd /sources
 
-rm -rfv gawk-5.3.1
+rm -rfv gawk-5.3.2
 
-tar -xf gawk-5.3.1.tar.xz
+tar -xf gawk-5.3.2.tar.xz
 
-cd gawk-5.3.1
+cd gawk-5.3.2
 
 sed -i 's/extras//' Makefile.in
 
@@ -22,7 +22,7 @@ su tester -c "PATH=$PATH make check"
 
 fi
 
-rm -f /usr/bin/gawk-5.3.1
+rm -f /usr/bin/gawk-5.3.2
 make install
 
 ln -sv gawk.1 /usr/share/man/man1/awk.1
@@ -30,5 +30,5 @@ ln -sv gawk.1 /usr/share/man/man1/awk.1
 
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
-install -vDm644 doc/{awkforai.txt,*.{eps,pdf,jpg}} -t /usr/share/doc/gawk-5.3.1
+install -vDm644 doc/{awkforai.txt,*.{eps,pdf,jpg}} -t /usr/share/doc/gawk-5.3.2
 fi

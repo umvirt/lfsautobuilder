@@ -2,13 +2,14 @@
 
 cd /sources
 
-tar -xf Python-3.13.2.tar.xz
+tar -xf Python-3.13.7.tar.xz
 
-cd Python-3.13.2
+cd Python-3.13.7
 
-./configure --prefix=/usr   \
-            --enable-shared \
-            --without-ensurepip
+./configure --prefix=/usr       \
+            --enable-shared     \
+            --without-ensurepip \
+            --without-static-libpython
 
 make
 

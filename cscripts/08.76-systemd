@@ -2,13 +2,13 @@
 
 cd /sources
 
-tar -xf systemd-257.3.tar.gz
+tar -xf systemd-257.8.tar.gz
 
-cd systemd-257.3
+cd systemd-257.8
 
-
-sed -i -e 's/GROUP="render"/GROUP="video"/' \
-       -e 's/GROUP="sgx", //' rules.d/50-udev-default.rules.in
+sed -e 's/GROUP="render"/GROUP="video"/' \
+    -e 's/GROUP="sgx", //'               \
+    -i rules.d/50-udev-default.rules.in
 
 mkdir -p build
 cd       build
@@ -31,7 +31,7 @@ meson setup ..                \
       -D nobody-group=nogroup \
       -D sysupdate=disabled   \
       -D ukify=disabled       \
-      -D docdir=/usr/share/doc/systemd-257.3
+      -D docdir=/usr/share/doc/systemd-257.8
 
 ninja
 
@@ -45,8 +45,8 @@ fi
 
 ninja install
 
-tar -xf ../../systemd-man-pages-257.3.tar.xz \
-    --no-same-owner --strip-components=1   \
+tar -xf ../../systemd-man-pages-257.8.tar.xz \
+    --no-same-owner --strip-components=1     \
     -C /usr/share/man
 
 systemd-machine-id-setup

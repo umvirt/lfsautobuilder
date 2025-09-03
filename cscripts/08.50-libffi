@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf libffi-3.4.7.tar.gz
+tar -xf libffi-3.5.2.tar.gz
 
-cd libffi-3.4.7
+cd libffi-3.5.2
 
 ./configure --prefix=/usr          \
             --disable-static       \

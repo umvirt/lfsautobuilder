@@ -2,12 +2,12 @@
 
 cd /sources
 
-rm -rfv grep-3.11
+rm -rfv grep-3.12
 
 
-tar -xf grep-3.11.tar.xz
+tar -xf grep-3.12.tar.xz
 
-cd grep-3.11
+cd grep-3.12
 
 sed -i "s/echo/#echo/" src/egrep.sh
 

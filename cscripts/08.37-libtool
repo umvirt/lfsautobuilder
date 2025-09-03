@@ -14,7 +14,7 @@ make
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
 
-make -k check
+make check
 
 fi
 
