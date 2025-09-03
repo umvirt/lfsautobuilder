@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf binutils-2.44.tar.xz
+tar -xf binutils-2.45.tar.xz
 
-cd binutils-2.44
+cd binutils-2.45
 
 mkdir -v build
 cd       build

@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf coreutils-9.6.tar.xz
+tar -xf coreutils-9.7.tar.xz
 
-cd coreutils-9.6
+cd coreutils-9.7
 
 ./configure --prefix=/usr                     \
             --host=$LFS_TGT                   \
