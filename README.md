@@ -1,6 +1,6 @@
 # Umvirt LFS Auto Builder
 
-LFS Version: 12.3-systemd
+LFS Version: 12.4-systemd
 
 License: GPL
 
@@ -46,7 +46,7 @@ Pros:
 
 Cons:
 
-- a part of available memory is taken by virtualiztion host (OS, hypervisor, management tools, etc.),
+- a part of available memory is taken by virtualization host (OS, hypervisor, management tools, etc.),
 - slower than physical computer.
 
 **2. Physical computer**
@@ -104,34 +104,35 @@ To check software run
 
 You have to get:
 
-    OK:    Coreutils 8.30   >= 7.0
-    OK:    Bash      4.4.18 >= 3.2
-    OK:    Binutils  2.31.1 >= 2.13.1
-    OK:    Bison     3.0.5  >= 2.7
-    OK:    Diffutils 3.6    >= 2.8.1
-    OK:    Findutils 4.6.0  >= 4.2.31
-    OK:    Gawk      4.2.1  >= 4.0.1
-    OK:    GCC       8.2.0  >= 5.1
-    OK:    GCC (C++) 8.2.0  >= 5.1
-    OK:    Grep      3.1    >= 2.5.1a
-    OK:    Gzip      1.9    >= 1.3.12
-    OK:    M4        1.4.18 >= 1.4.10
-    OK:    Make      4.2.1  >= 4.0
-    OK:    Patch     2.7.6  >= 2.5.4
-    OK:    Perl      5.28.0 >= 5.8.8
-    OK:    Python    3.7.0  >= 3.4
-    OK:    Sed       4.5    >= 4.1.5
-    OK:    Tar       1.30   >= 1.22
-    OK:    Texinfo   6.5    >= 5.0
-    OK:    Xz        5.2.4  >= 5.0.0
-    OK:    Linux Kernel 5.2.9 >= 4.14
-    OK:    Linux Kernel supports UNIX 98 PTY
-    Aliases:
-    OK:    awk  is GNU
-    OK:    yacc is Bison
-    OK:    sh   is Bash
-    Compiler check:
-    OK:    g++ works
+        OK:    Coreutils 9.6    >= 8.1
+        OK:    Bash      5.2.37 >= 3.2
+        OK:    Binutils  2.44   >= 2.13.1
+        OK:    Bison     3.8.2  >= 2.7
+        OK:    Diffutils 3.11   >= 2.8.1
+        OK:    Findutils 4.10.0 >= 4.2.31
+        OK:    Gawk      5.3.1  >= 4.0.1
+        OK:    GCC       14.2.0 >= 5.4
+        OK:    GCC (C++) 14.2.0 >= 5.4
+        OK:    Grep      3.11   >= 2.5.1a
+        OK:    Gzip      1.13   >= 1.3.12
+        OK:    M4        1.4.19 >= 1.4.10
+        OK:    Make      4.4.1  >= 4.0
+        OK:    Patch     2.7.6  >= 2.5.4
+        OK:    Perl      5.40.1 >= 5.8.8
+        OK:    Python    3.13.2 >= 3.4
+        OK:    Sed       4.9    >= 4.1.5
+        OK:    Tar       1.35   >= 1.22
+        OK:    Texinfo   7.2    >= 5.0
+        OK:    Xz        5.6.4  >= 5.0.0
+        OK:    Linux Kernel 6.13.4 >= 5.4
+        OK:    Linux Kernel supports UNIX 98 PTY
+        Aliases:
+        OK:    awk  is GNU
+        OK:    yacc is Bison
+        OK:    sh   is Bash
+        Compiler check:
+        OK:    g++ works
+        OK: nproc reports 8 logical cores are available
 
 In addition you also need followed software packages:
 
