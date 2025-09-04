@@ -1,6 +1,8 @@
-# Umvirt LFS Auto Builder
+# UmVirt LFSAutoBuilder
 
-LFS Version: 12.4-systemd
+LFS Version: 12.4
+
+Supported editions:  SysV, Systemd
 
 License: GPL
 
@@ -24,81 +26,17 @@ This software is aimed to experienced Linux From Scratch maintainers.
 
 ## Building environment
 
-There are few variants of building environment:
+This software intended to run inside Virtual Machine (VM).
 
-1. Virtual Machine with two drives.
+Virtual Machine acts as Build Environment (BE).
 
-2. Physical computer:
+### Software
 
-2.a. Physical computer with local disk.
+####  Operating system
 
-2.b. Physical computer with block device.
+Almost any modern x86_64 (amd64) GNU/Linux distribution is suitable. We prefere ULFS 0.2.3 (Linux From Scratch 12.3-systemd).
 
-### Pros & cons
-
-**1. Virtual Machine with two drives**
-
-Pros:
-
-- no additional software that can affect on building process,
-- absolutely safe,
-- no issues with GRUB bootloader installation.
-
-Cons:
-
-- a part of available memory is taken by virtualization host (OS, hypervisor, management tools, etc.),
-- slower than physical computer.
-
-**2. Physical computer**
-
-Pros:
-
-- maximum amount of memory is available,
-- maximum amount of CPU's cores is available.
-
-Cons:
-
-- installed software can affect on building process,
-- error can damage installed software & data.
-
-**2.a. Physical computer with local disk**
-
-Pros:
-
-- faster than using block device.
-
-Cons:
-
-- additional drive is needed.
-
-**1.b. Physical computer with block device**
-
-Pros:
-
-- can be used free diskspace on existent partitions.
-
-Cons:
-
-- slower than local disk,
-- issues with GRUB bootloader installation. GRUB Live CD is needed to boot & install bootloader manualy.
-
-### Requirements
-
-#### Hardware
-
-**CPU:** x86_64 (amd64)
-
-**HDD:** 30GB
-
-**SWAP:** none
-
-**RAM:** 2GB per CPU's core 
-
-#### Software
-
-**OS:** GNU/Linux. We prefere ULFS 0.1 (Linux From Scratch 8.3-systemd)
-
-To check software run 
+To check build system run:
 
     bash version-check.sh
 
@@ -134,9 +72,10 @@ You have to get:
         OK:    g++ works
         OK: nproc reports 8 logical cores are available
 
+#### Aditional software
+
 In addition you also need followed software packages:
 
-- **php** - to run dlist.php.
 - **qemu** - to run virtual machine and to create disk images (block devices).
 - **mutipath-tools** - to mount partitions on block devices.
 - **tmux** - to run TMUX version of vmautobuild.
@@ -144,7 +83,46 @@ In addition you also need followed software packages:
 - **markdown** - to convert Builder documentation in HTML format.
 - **neofetch** - to save Builder system information in logs.
 
-### Resource allocation for VM
+### Hardware
+
+**CPU:** x86_64 (amd64)
+
+**SWAP:** none
+
+**RAM:** 2GB per CPU's core 
+
+**Warning:**  Use hypervisor to set CPU model. Model "qemu64" is most safe and allows to move disk between machines with different CPU models.
+
+####Disks
+
+VM should have two disks:
+
+- System disk
+- Target disk
+
+##### System disk
+
+System disk is disk which used to boot and run a build system.
+
+LiveCD/DVD (/dev/sr0) or VirtIO(/dev/vda) drives can be used.
+
+##### Target disk
+
+Target disk is disk which used to build a LFS system. disk should be used.
+
+20GB or more IDE or SATA drive (/dev/sda) should be used.
+
+Durinig a build proccess MBR partition table will be created.
+
+Also one partition ext4 will be created and formated.
+
+Later after build LFS system can be moved to 
+
+- Live media (LiveCD/DVD/USB)
+- Other disk and other partition
+- Other machine to perform network boot
+
+#### Resource allocation for VM
 
 Because host consumes memory, Virtual Machine memory & CPUs are need to be reduced. 
 
@@ -154,30 +132,16 @@ Because one core consumes 2GB of RAM, maximum amount of cores is 6.
 Lack of free host memory can cause Virtual Machine sudden poweroff. 
 You can check kernel error messages with *dmesg* command 
 
-### Estemated time amount (ETA)
+#### Estemated time amount (ETA)
 
-Automatic building LFS without tests on virtual machine (6 CPUs, 12GB RAM) on AMD FX8350 is takes about 157 minutes.
+Automatic building LFS without tests on virtual machine (7 CPUs, 20GB RAM) on AMD FX8350 is takes about 180 minutes.
 
 To speed up building you can use
 
 - more powerful CPU
 - more faster storage: SSD, RAM-disk
 
-## Disk image
-
-### Disk layout
-
-**Storage type:** RAW - Allows to mount block device.
-
-**Partition table:** DOS - Support for old hardware & emulators.
-
-**Only one partition:**
-
-1. **root (sda1):** 30GB, ext4, bootable - reduce backup size by ignoring swap partition.
-
-**Swap partition:** none - can be placed on additional disk.
-
-### Final result
+## Final result
 
 After building you will get:
 
@@ -203,11 +167,19 @@ After downloading via *Git* you have to make somedirectories:
 
 ### Downloading source code packages
 
-Download *wget-list* & *md5sums* files from LFS site and put in books directory
+Download *wget-list* & *md5sums* files from LFS site and put in "src/books" directory
 
 You can download sorce code packages manually or by runing *downloadsrc*:
 
     ./downoadsrc
+
+In some cases problems with packages availability can take place.
+
+### Placing already downloaded source code packages
+
+It's possible to download packages on other place and put them to build environment.
+
+Source code packages should be placed in "src/packages" directory.
 
 ### Source code packages integrity check
 
@@ -232,106 +204,28 @@ You will get:
     Files with checksums: 89 
     Files with wrong checksums: 0 
 
-
-
-### Disk image creating
-
-To create disk image file you can use *qemu-img* command:
-
-    qemu-img create -f raw hdd.img 30G
-
-To create partition table & bootable ext4 patition you can use *fdisk* command:
-
-    fdisk hdd.img
-
-### Disk image partition formatting
-
-*Note: This step is used when building performed on physical computer.
-If you perform building in virtual machine skip this step.*
-
-At first you have to pass disk image file to device mapper
-
-    kpartx -av hdd.img
-
-After passing file to device mapper you can access to partition.
-
-Now you can format partition on disk image:
-
-    mkfs.ext4 /dev/mapper/loop3p1
-
-### Disk image partition mounting
-
-*Note: This step is used when building performed on physical computer.
-If you perform building in virtual machine skip this step.*
-
-After formatting you can mount partition:
-
-    mount /dev/mapper/loop3p1 builddir
-
 ### Configuration
 
-### Files
+You can use "config/config.sh" file to set build options.
 
-There are 4 configuration files
+If file is not available copy config file template.
 
-- configuration file for scripts to run on host as root: *env.sh*
-- configuration file for scripts to run on target partition as lfs user: *userenv.sh*
-- configuration files for scripts to run on target partition in chroot mode as root user: *cscripts.config/config.sh*, *cscripts.config/env.sh*
+    cd config
+    cp config.sh.sample config.sh
 
-Configuration files are BASH-scripts that loaded from other scripts.
-They can act as scripts too. Commands that called in configuration files are also called by other scripts.
+### Build environment init
 
-To view contents of config files at once, you can use showconfig script:
+Build directory should be created according to config file before runing build.
 
-    ./showconfig
+To init environmant run:
 
-### Directives
+    ./invinit
 
-Configuration directives on all config files have same meaning but various area of influence.
-
-#### LFS\_TGT
-
-Target system architecture.
-
-Default: $(uname -m)-lfs-linux-gnu
-
-Supported values:
-
--  $(uname -m)-lfs-linux-gnu
--  x86_64-lfs-linux-gnu
--  i686-lfs-linux-gnu
-
-#### MAKEFLAGS
-
-Options for Make build system.
-
-For example, "-j8" for run compilation in 8 threads.
-
-#### NINJAJOBS
-
-Number of CPU's cores which used by Ninja build system.
-
-#### ULFS\_TESTS
-
-"YES" for run non-critical tests on compilation time. Any other value - skip tests.
-
-#### ULFS\_CRITICAL\_TESTS
-
-"YES" for run critical tests on compilation time. Any other value - skip tests.
-
-#### ULFS\_DOCS
-
-"YES" for install documentation when it possibe. Any other value - skip documentation install.
-
-## Building
-
-### Automatic build
-
-Automatic build can be performed only in virtual machine.
+### Build
 
 **Warning: Running autmatic build on physical computer cause data loss!**
 
-In order of autmatic build you have to run just one command:
+In order of automatic build you have to run just one command:
 
     ./vmautobuild
 
@@ -339,123 +233,13 @@ You can place this command in time program to count build time:
 
     time ./vmautobuild
 
-### Semiautomatic build
+It's possible to use tmux version:
 
-#### Initial state
-
-Before start you have:
-
-- Source code downloaded & integrity is checked.
-- Build environment meet requirements.
-- Target partition mounted in builddir directory.
-- You logined as *root* and located on root directory of this software.
-
-#### Stage 0
-
-Copy source code to target partition
-
-    ./copysrc
-
-Create directories on target partition
-
-    ./initdirs
-
-Create *lfs* user on build environment
-
-    ./adduser
-
-Change directiories ownership on target partition to *lfs* user
-
-    ./chown2user
-
-#### Stage 1
-
-On this stage all operations performed by *lfs* user.
-You can emulate *lfs* user activity by *root* or login as *lfs*
-
-##### Variant A. Running Stage 1 by root
-
-If you want to make operations from root run the command
-
-    su - lfs -c "cd `pwd` && time ./runscripts"
-
-If everything is ok delete source code packages from target partition
-
-    ./deletesrc
-
-Now you can go to next stage
-
-##### Variant B. Running Stage 2 by lfs
-
-Login to *lfs* shell
-
-    su - lfs
-
-Load shell configuration
-
-    . userenv.sh
-
-Now you can run scripts
-
-    time ./runscripts
-
-If everything is ok delete source code packages from target partition
-
-    rm -rf builddir/sources
-
-Logout from *lfs* shell
-
-    exit
-
-#### Stage 2
-
-Check that you *root*. If not login as *root*:
-
-    whoami
-
-Copy source code again to target partition. Old directories in sources directory broke new compilations:
-
-    ./copysrc
-
-Create directories for chrooting:
-
-    ./chrootinit
-
-Mount system filesystems on target partition:
-
-    ./chrootmount
-
-Run build operations in chroot environment:
-
-    time ./runchrootscripts
-
-If target partition is not placed on disk image install GRUB boot manager:
-
-    ./chrootcmd grub-install /dev/sda
-
-Delete *root* password. Make it empty:
-
-    ./chrootcmd passwd -d root
-
-Delete source code packages:
-
-    ./deletesrc
-
-Cleanup file system & zeroing free space:
-
-    ./finish
-
-Unmount system filesystems on target partition:
-
-    ./chrootumount
-
-Unmount target partition
-
-    umount builddir
+    ./vmautobuild-tmux
 
 ## Additional information
 
-### Directory structure
+### Build Directory structure
 
 - **books/** - files provided with LFS book.
     - wget-list - source packages & patches files list.
