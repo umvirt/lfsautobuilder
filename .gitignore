@@ -1,7 +1,6 @@
-builddir/
-books/
 src/
+config/config.sh
 tmp/
-log/
+build/
 README.html
 patch
