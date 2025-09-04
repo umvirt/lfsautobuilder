@@ -5,25 +5,25 @@ echo "------------------------------------"
 mkdir tmp 2>/dev/null
 
 #parsing wget list
-./dlist.php | sort > tmp/dlist.txt 
+cat src/books/wget-list | rev | cut -d \/ -f  1 | rev | sort > tmp/dlist.txt
 
-cd src
+cd src/packages
 
 #check checksums of found files and store report in sorted order
-md5sum --ignore-missing -c ../books/md5sums | sort > ../tmp/src.md5
+md5sum --ignore-missing -c ../books/md5sums | sort > ../../tmp/src.md5
 echo
 
-cd ../tmp
+cd ../../tmp
 
 #List files in sorted order
-ls ../src | sort > src.txt
+ls ../src/packages | sort > src.txt
 
 #Compare local files list and wanted files list
 comm -13 src.txt dlist.txt > dmissing.txt
 
-(cat ../books/md5sums | awk '{print $2}') | sort > md5.txt
+(cat ../src/books/md5sums | awk '{print $2}') | sort > md5.txt
 
-dsrc=`wc -l ../books/wget-list | awk '{print $1}'` 
+dsrc=`wc -l ../src/books/wget-list | awk '{print $1}'` 
 
 csrc=`wc -l src.txt | awk '{print $1}'` 
 
