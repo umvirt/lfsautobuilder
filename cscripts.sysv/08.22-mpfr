@@ -2,15 +2,14 @@
 
 cd /sources
 
-tar -xf mpfr-4.2.1.tar.xz
+tar -xf mpfr-4.2.2.tar.xz
 
-cd mpfr-4.2.1
+cd mpfr-4.2.2
 
 ./configure --prefix=/usr        \
             --disable-static     \
             --enable-thread-safe \
-            --docdir=/usr/share/doc/mpfr-4.2.1
-
+            --docdir=/usr/share/doc/mpfr-4.2.2
 make
 
 if [[ "$ULFS_DOCS" == "YES" ]]

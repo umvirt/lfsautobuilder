@@ -2,13 +2,13 @@
 
 cd /sources
 
-tar -xf systemd-257.3.tar.gz
+tar -xf systemd-257.8.tar.gz
 
-cd systemd-257.3
+cd systemd-257.8
 
-
-sed -i -e 's/GROUP="render"/GROUP="video"/' \
-       -e 's/GROUP="sgx", //' rules.d/50-udev-default.rules.in
+sed -e 's/GROUP="render"/GROUP="video"/' \
+    -e 's/GROUP="sgx", //'               \
+    -i rules.d/50-udev-default.rules.in
 
 sed -i '/systemd-sysctl/s/^/#/' rules.d/99-systemd.rules.in
 
@@ -29,6 +29,7 @@ meson setup ..                  \
 
 export udev_helpers=$(grep "'name' :" ../src/udev/meson.build | \
                       awk '{print $3}' | tr -d ",'" | grep -v 'udevadm')
+
 
 ninja udevadm systemd-hwdb                                           \
       $(ninja -n | grep -Eo '(src/(lib)?udev|rules.d|hwdb.d)/[^ ]*') \
@@ -55,7 +56,7 @@ install -vm644 ../network/99-default.link          /usr/lib/udev/network
 tar -xvf ../../udev-lfs-20230818.tar.xz
 make -f udev-lfs-20230818/Makefile.lfs install
 
-tar -xf ../../systemd-man-pages-257.3.tar.xz                            \
+tar -xf ../../systemd-man-pages-257.8.tar.xz                            \
     --no-same-owner --strip-components=1                              \
     -C /usr/share/man --wildcards '*/udev*' '*/libudev*'              \
                                   '*/systemd.link.5'                  \
@@ -74,5 +75,6 @@ sed 's|lib.*udevd|sbin/udevd|'                                        \
 
 rm /usr/share/man/man*/systemd*
 
-
 unset udev_helpers
+
+udev-hwdb update

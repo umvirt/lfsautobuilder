@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf less-668.tar.gz
+tar -xf less-679.tar.gz
 
-cd less-668
+cd less-679
 
 ./configure --prefix=/usr --sysconfdir=/etc
 

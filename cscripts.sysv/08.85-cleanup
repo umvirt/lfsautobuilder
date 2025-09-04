@@ -7,4 +7,4 @@ find /usr -depth -name $(uname -m)-lfs-linux-gnu\* | xargs rm -rf
 #7.06
 userdel -r tester
 
-touch /tmp/08.83-cleanup
+touch /tmp/08.85-cleanup

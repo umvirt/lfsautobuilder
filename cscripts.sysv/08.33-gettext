@@ -2,13 +2,13 @@
 
 cd /sources
 
-tar -xf gettext-0.24.tar.xz
+tar -xf gettext-0.26.tar.xz
 
-cd gettext-0.24
+cd gettext-0.26
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/gettext-0.24
+            --docdir=/usr/share/doc/gettext-0.26
 
 make
 

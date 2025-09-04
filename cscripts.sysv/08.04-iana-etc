@@ -2,8 +2,8 @@
 
 cd /sources
 
-tar -xf iana-etc-20250123.tar.gz
+tar -xf iana-etc-20250807.tar.gz
 
-cd iana-etc-20250123
+cd iana-etc-20250807
 
 cp -v services protocols /etc

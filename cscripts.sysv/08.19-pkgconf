@@ -2,14 +2,13 @@
 
 cd /sources
 
-tar -xf pkgconf-2.3.0.tar.xz
+tar -xf pkgconf-2.5.1.tar.xz
 
-cd pkgconf-2.3.0
+cd pkgconf-2.5.1
 
-./configure --prefix=/usr              \
-            --disable-static           \
-            --docdir=/usr/share/doc/pkgconf-2.3.0
-
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/pkgconf-2.5.1
 
 make
 

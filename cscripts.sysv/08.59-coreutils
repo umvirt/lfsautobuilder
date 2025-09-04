@@ -2,21 +2,19 @@
 
 cd /sources
 
-rm -rfv coreutils-9.6
+rm -rfv coreutils-9.7
 
-tar -xf coreutils-9.6.tar.xz
+tar -xf coreutils-9.7.tar.xz
 
-cd coreutils-9.6
+cd coreutils-9.7
+
+patch -Np1 -i ../coreutils-9.7-upstream_fix-1.patch
 
 #BUGFIX (comment if needed)
-patch -Np1 -i ../coreutils-9.6-i18n-1.patch
+patch -Np1 -i ../coreutils-9.7-i18n-1.patch
 
-#ln -s aclocal /usr/bin/aclocal-1.16
-#ln -s automake /usr/bin/automake-1.16
-
-
-autoreconf -fiv
-export FORCE_UNSAFE_CONFIGURE=1
+autoreconf -fv
+automake -af
 FORCE_UNSAFE_CONFIGURE=1 ./configure \
             --prefix=/usr            \
             --enable-no-install-program=kill,uptime

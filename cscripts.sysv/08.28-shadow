@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf shadow-4.17.3.tar.xz
+tar -xf shadow-4.18.0.tar.xz
 
-cd shadow-4.17.3
+cd shadow-4.18.0
 
 
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in

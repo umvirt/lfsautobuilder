@@ -2,14 +2,15 @@
 
 cd /sources
 
-tar -xf Python-3.13.2.tar.xz
+tar -xf Python-3.13.7.tar.xz
 
-cd Python-3.13.2
+cd Python-3.13.7
 
-./configure --prefix=/usr        \
-            --enable-shared      \
-            --with-system-expat  \
-            --enable-optimizations
+./configure --prefix=/usr          \
+            --enable-shared        \
+            --with-system-expat    \
+            --enable-optimizations \
+            --without-static-libpython
 
 make
 
@@ -34,13 +35,12 @@ EOF
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
 
-install -v -dm755 /usr/share/doc/python-3.13.2/html
+install -v -dm755 /usr/share/doc/python-3.13.7/html
 
 tar --strip-components=1  \
     --no-same-owner       \
     --no-same-permissions \
-    -C /usr/share/doc/python-3.13.2/html \
-    -xvf ../python-3.13.2-docs-html.tar.bz2
-
+    -C /usr/share/doc/python-3.13.7/html \
+    -xvf ../python-3.13.7-docs-html.tar.bz2
 
 fi

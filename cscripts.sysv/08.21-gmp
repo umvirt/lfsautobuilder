@@ -23,6 +23,8 @@ ABI="ABI=32"
 
 fi
 
+sed -i '/long long t1;/,+1s/()/(...)/' configure
+
 echo "echo $LFS_TGT" > config.sh
 echo "$ABI ./configure --prefix=/usr    \
             --enable-cxx     \

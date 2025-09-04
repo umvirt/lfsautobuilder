@@ -39,6 +39,8 @@ fi
 
 make install
 
+chmod 644 /usr/lib/libtclstub8.6.a
+
 chmod -v u+w /usr/lib/libtcl8.6.so
 
 make install-private-headers

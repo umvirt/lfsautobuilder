@@ -2,8 +2,8 @@
 
 cd /sources
 
-tar -xf lfs-bootscripts-20240825.tar.xz
+tar -xf lfs-bootscripts-20250827.tar.xz
 
-cd lfs-bootscripts-20240825
+cd lfs-bootscripts-20250827
 
 make install

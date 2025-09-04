@@ -2,17 +2,16 @@
 
 cd /sources
 
-tar -xf sysklogd-2.7.0.tar.gz
+tar -xf sysklogd-2.7.2.tar.gz
 
-cd sysklogd-2.7.0
+cd sysklogd-2.7.2
 
 ./configure --prefix=/usr      \
             --sysconfdir=/etc  \
             --runstatedir=/run \
             --without-logger   \
             --disable-static   \
-            --docdir=/usr/share/doc/sysklogd-2.7.0
-
+            --docdir=/usr/share/doc/sysklogd-2.7.2
 make
 
 make install
@@ -33,4 +32,3 @@ secure_mode 2
 
 # End /etc/syslog.conf
 EOF
-

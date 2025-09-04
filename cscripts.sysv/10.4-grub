@@ -14,7 +14,7 @@ insmod part_gpt
 insmod ext2
 set root=(hd0,1)
 
-menuentry "GNU/Linux, Linux 6.13.4-lfs-12.3" {
-        linux   /boot/vmlinuz-6.13.4-lfs-12.3 root=/dev/sda1 ro
+menuentry "GNU/Linux, Linux 6.16.1-lfs-12.4" {
+        linux   /boot/vmlinuz-6.16.1-lfs-12.4 root=/dev/sda1 ro
 }
 EOF
