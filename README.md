@@ -169,11 +169,13 @@ After downloading via *Git* you have to make somedirectories:
 
 Download *wget-list* & *md5sums* files from LFS site and put in "src/books" directory
 
-You can download sorce code packages manually or by runing *downloadsrc*:
+You can download sorce code packages manually or by runing downloader script *downloadsrc*:
 
     ./downoadsrc
 
 In some cases problems with packages availability can take place.
+
+In such case edit "config/downloaderconfig.sh" file.
 
 ### Placing already downloaded source code packages
 
@@ -183,7 +185,7 @@ Source code packages should be placed in "src/packages" directory.
 
 ### Source code packages integrity check
 
-Run *checksrc* to perform integrity check
+Run *checksrc* script to perform integrity check
 
     ./checksrc
 
@@ -204,6 +206,10 @@ You will get:
     Files with checksums: 89 
     Files with wrong checksums: 0 
 
+If some files not found then run downloader script again.
+
+If some files have wrong checksums then delete this files and run downloader script again.
+
 ### Configuration
 
 You can use "config/config.sh" file to set build options.
@@ -217,7 +223,7 @@ If file is not available copy config file template.
 
 Build directory should be created according to config file before runing build.
 
-To init environmant run:
+To init environment run:
 
     ./invinit
 

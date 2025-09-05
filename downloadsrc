@@ -1,2 +1,73 @@
-cd src
-wget -c -i ../books/wget-list  -o ../tmp/wget.log
+#!/bin/bash
+
+. config/downloaderconfig.sh
+
+if [ ! -f src/books/wget-list ]
+then
+echo "Error: wget-list file not found."
+exit
+fi
+
+#defaults
+if [[ $DOWNLOAD_APP == "" ]]
+then
+DOWNLOAD_APP='wget'
+fi
+
+
+
+
+cd src/packages
+
+if [[ $DOWNLOAD_APP == "wget" ]]
+then
+echo "Download files using wget..."
+echo
+
+#optional insecure mode support
+insecurearg=
+if [[ $INSECURE_MODE == "YES" ]]
+then
+echo "Insecure mode: enabled" | tee -a  ../../tmp/wget.log
+insecurearg="--no-check-certificate"
+else
+echo "Insecure mode: disabled" | tee -a  ../../tmp/wget.log
+fi
+
+wget $insecurearg  -c -i ../books/wget-list  2>&1 | tee  ../../tmp/wget.log
+fi
+
+
+if [[ $DOWNLOAD_APP == "curl" ]]
+then
+echo "Download files using curl..."
+echo
+
+rm ../../tmp/curl.log
+
+for s in `cat ../books/wget-list` ; do
+echo "Downloading: $s"  | tee  -a ../../tmp/curl.log
+
+#optional insecure mode support
+insecurearg=
+if [[ $INSECURE_MODE == "YES" ]]
+then
+echo "Insecure mode: enabled" | tee -a  ../../tmp/curl.log
+insecurearg="-k"
+else
+echo "Insecure mode: disabled" | tee -a  ../../tmp/curl.log
+fi
+
+#optional proxy support
+proxyarg=
+if [[ $CURL_PROXY != "" ]]
+then
+echo "Using proxy: $CURL_PROXY" | tee -a  ../../tmp/curl.log
+proxyarg="-x $CURL_PROXY"
+fi
+
+
+curl $proxyarg $insecurearg --skip-existing -O $s 2>&1 | tee  -a ../../tmp/curl.log
+done
+
+fi

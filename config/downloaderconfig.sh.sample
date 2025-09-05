@@ -1,0 +1,15 @@
+#
+# UmVirt LFSAutoBuilder Downloader Configuration file
+# ---------------------------------------------------
+#
+# Download application
+#
+# Possible values: "wget", "curl"
+# Default: "wget"
+#
+DOWNLOAD_APP=
+# CURL proxy
+#
+# Possible values: [protocol://]host[:port]
+# Default: ""
+CURL_PROXY=

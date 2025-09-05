@@ -1,5 +1,6 @@
 src/
 config/config.sh
+config/downloaderconfig.sh
 tmp/
 build/
 README.html
