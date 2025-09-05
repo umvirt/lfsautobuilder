@@ -7,6 +7,10 @@
 
 echo -e "Preparing for building $LFS_TARGET_ARCH disk image...\n"
 
+echo -e "Unmounting build/builddir mount point...\n"
+
+umount build/builddir
+echo
 echo -e "Deleting buid directory contents...\n"
 rm -rfv build/*
 echo
