@@ -2,6 +2,18 @@ echo "------------------------------------"
 echo " Linux From Scratch Integrity Check "
 echo "------------------------------------"
 
+if [ ! -f src/books/wget-list ]
+then
+echo "Error: wget-list file not found."
+exit
+fi
+
+if [ ! -f src/books/md5sums ]
+then
+echo "Error: md5sums file not found."
+exit
+fi
+
 mkdir tmp 2>/dev/null
 
 #parsing wget list
