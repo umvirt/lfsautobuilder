@@ -67,7 +67,7 @@ proxyarg="-x $CURL_PROXY"
 fi
 
 
-curl $proxyarg $insecurearg --skip-existing -O $s 2>&1 | tee  -a ../../tmp/curl.log
+curl $proxyarg $insecurearg --skip-existing -L -O $s 2>&1 | tee  -a ../../tmp/curl.log
 done
 
 fi
