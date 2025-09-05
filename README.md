@@ -167,7 +167,15 @@ After downloading via *Git* you have to make somedirectories:
 
 ### Downloading source code packages
 
-Download *wget-list* & *md5sums* files from LFS site and put in "src/books" directory
+Download *wget-list* & *md5sums* files from LFS site and put in "src/books" directory.
+
+File *wget-list* is common for both editions (SysV and Systemd).
+
+File *md5sums* is edition specific.
+
+If you wish to build disk images for both editions merge md5sums for both editions:
+
+    cat systemd.md5sums sysv.md5sums | uniq > md5sums
 
 You can download sorce code packages manually or by runing downloader script *downloadsrc*:
 
