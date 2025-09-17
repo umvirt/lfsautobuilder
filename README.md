@@ -227,13 +227,26 @@ If file is not available copy config file template.
     cd config
     cp config.sh.sample config.sh
 
+After editing config.sh file check configuration with dumpconfig script:
+
+    ./dumpconfig
+
+Sample dumpconfig output:
+
+    UmVirt LFSAutoBuilder configuration
+    -----------------------------------
+
+    Target architecture: amd64
+    Target init system: systemd
+
+
 ### Build environment init
 
 Build directory should be created according to config file before runing build.
 
 To init environment run:
 
-    ./invinit
+    ./envinit
 
 ### Build
 
