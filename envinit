@@ -57,10 +57,11 @@ echo 'PWD=`pwd`' >> build/env.sh
 echo 'LFS="$PWD/builddir"' >> build/env.sh
 echo 'MAKEFLAGS="-j`nproc`"' >> build/env.sh
 echo 'PARTITION="sda1"' >>  build/env.sh
+echo 'DISK=`echo $PARTITION | sed -e "s/[0-9]*$//"`' >> build/env.sh
 echo  >> build/env.sh
 echo 'echo $LFS' >> build/env.sh
 echo  >> build/env.sh
-echo 'export PWD LFS MAKEFLAGS' >> build/env.sh
+echo 'export PWD LFS MAKEFLAGS PARTITION DISK' >> build/env.sh
 
 echo '---'
 cat build/env.sh
