@@ -60,3 +60,4 @@ done
 date +%s > log/_cscripts.end
 
 rm log/current_script
+rm -rv builddir/cscripts
