@@ -4,6 +4,3 @@
 ./chrootcmd passwd -d root
 
 rm -rfv $LFS/tmp/*
-dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
-sleep 5
-rm -v $LFS/zero

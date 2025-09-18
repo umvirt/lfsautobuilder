@@ -13,3 +13,4 @@ runchrootscripts
 deletesrc2
 vmfinish
 chrootumount
+vmcleanup

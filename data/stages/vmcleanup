@@ -1,0 +1,17 @@
+. env.sh
+
+#umount partition
+umount /dev/$PARTITION
+#reset journal
+tune2fs -O ^has_journal /dev/$PARTITION
+#mount partition
+mount /dev/$PARTITION builddir
+
+#defrag
+e4defrag /dev/$PARTITION
+
+#fill empty space with zeroes
+dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
+
+sleep 5
+rm -v $LFS/zero
