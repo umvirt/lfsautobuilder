@@ -1,17 +1,34 @@
 . env.sh
 
 #umount partition
-umount /dev/$PARTITION
+#umount /dev/$PARTITION
 #reset journal
-tune2fs -O ^has_journal /dev/$PARTITION
+#tune2fs -O ^has_journal /dev/$PARTITION
 #mount partition
-mount /dev/$PARTITION builddir
+mount -v /dev/$PARTITION builddir
 
 #defrag
-e4defrag /dev/$PARTITION
+#e4defrag /dev/$PARTITION
 
 #fill empty space with zeroes
 dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
 
-sleep 5
+free -m
+
+
+#commit filesystem caches to disk
+sync
+
+#clear caches to write all zeroes on disk.
+echo 3 | tee /proc/sys/vm/drop_caches
+
+
+#sleep 1 minute
+#sleep 60
+
+free -m
+
 rm -v $LFS/zero
+
+#umount partition
+umount -v /dev/$PARTITION

@@ -4,3 +4,6 @@
 ./chrootcmd passwd -d root
 
 rm -rfv $LFS/tmp/*
+
+#umount partition
+umount -v /dev/$PARTITION
