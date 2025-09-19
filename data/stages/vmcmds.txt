@@ -11,6 +11,6 @@ chrootinit
 chrootmount
 runchrootscripts
 deletesrc2
-vmfinish
 chrootumount
+vmfinish
 vmcleanup
