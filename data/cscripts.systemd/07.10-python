@@ -2,9 +2,9 @@
 
 cd /sources
 
-tar -xf Python-3.13.7.tar.xz
+tar -xf Python-3.14.3.tar.xz
 
-cd Python-3.13.7
+cd Python-3.14.3
 
 ./configure --prefix=/usr       \
             --enable-shared     \

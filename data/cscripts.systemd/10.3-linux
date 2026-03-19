@@ -2,16 +2,16 @@
 
 cd /sources
 
-rm -rfv linux-6.16.1
+rm -rfv linux-6.18.10
 
-tar -xf linux-6.16.1.tar.xz
+tar -xf linux-6.18.10.tar.xz
 
 if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
 then
-    cp -rv linux-6.16.1 /usr/src
+    cp -rv linux-6.18.10 /usr/src
 fi
 
-cd linux-6.16.1
+cd linux-6.18.10
 
 #FORCING ARCH 
 ARCH=""
@@ -53,16 +53,16 @@ cat kernelbuilder
 
 ./kernelbuilder
 
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.16.1-lfs-12.4-systemd
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.18.10-lfs-13.0-systemd
 
-cp -iv System.map /boot/System.map-6.16.1
+cp -iv System.map /boot/System.map-6.18.10
 
-cp -iv .config /boot/config-6.16.1
+cp -iv .config /boot/config-6.18.10
 
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
 
-cp -r Documentation -T /usr/share/doc/linux-6.16.1
+cp -r Documentation -T /usr/share/doc/linux-6.18.10
 
 fi
 
@@ -75,4 +75,3 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 
 # End /etc/modprobe.d/usb.conf
 EOF
-

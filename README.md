@@ -1,8 +1,8 @@
 # UmVirt LFSAutoBuilder
 
-LFS Version: 12.4
+LFS Version: 13.0
 
-Supported editions:  SysV, Systemd
+Supported editions:  Systemd
 
 License: GPL
 
@@ -42,35 +42,35 @@ To check build system run:
 
 You have to get:
 
-        OK:    Coreutils 9.6    >= 8.1
-        OK:    Bash      5.2.37 >= 3.2
-        OK:    Binutils  2.44   >= 2.13.1
-        OK:    Bison     3.8.2  >= 2.7
-        OK:    Diffutils 3.11   >= 2.8.1
-        OK:    Findutils 4.10.0 >= 4.2.31
-        OK:    Gawk      5.3.1  >= 4.0.1
-        OK:    GCC       14.2.0 >= 5.4
-        OK:    GCC (C++) 14.2.0 >= 5.4
-        OK:    Grep      3.11   >= 2.5.1a
-        OK:    Gzip      1.13   >= 1.3.12
-        OK:    M4        1.4.19 >= 1.4.10
-        OK:    Make      4.4.1  >= 4.0
-        OK:    Patch     2.7.6  >= 2.5.4
-        OK:    Perl      5.40.1 >= 5.8.8
-        OK:    Python    3.13.2 >= 3.4
-        OK:    Sed       4.9    >= 4.1.5
-        OK:    Tar       1.35   >= 1.22
-        OK:    Texinfo   7.2    >= 5.0
-        OK:    Xz        5.6.4  >= 5.0.0
-        OK:    Linux Kernel 6.13.4 >= 5.4
-        OK:    Linux Kernel supports UNIX 98 PTY
-        Aliases:
-        OK:    awk  is GNU
-        OK:    yacc is Bison
-        OK:    sh   is Bash
-        Compiler check:
-        OK:    g++ works
-        OK: nproc reports 8 logical cores are available
+    OK:    Coreutils 9.6    >= 8.1
+    OK:    Bash      5.2.37 >= 3.2
+    OK:    Binutils  2.44   >= 2.13.1
+    OK:    Bison     3.8.2  >= 2.7
+    OK:    Diffutils 3.11   >= 2.8.1
+    OK:    Findutils 4.10.0 >= 4.2.31
+    OK:    Gawk      5.3.1  >= 4.0.1
+    OK:    GCC       14.2.0 >= 5.4
+    OK:    GCC (C++) 14.2.0 >= 5.4
+    OK:    Grep      3.11   >= 2.5.1a
+    OK:    Gzip      1.13   >= 1.3.12
+    OK:    M4        1.4.19 >= 1.4.10
+    OK:    Make      4.4.1  >= 4.0
+    OK:    Patch     2.7.6  >= 2.5.4
+    OK:    Perl      5.40.1 >= 5.8.8
+    OK:    Python    3.13.2 >= 3.4
+    OK:    Sed       4.9    >= 4.1.5
+    OK:    Tar       1.35   >= 1.22
+    OK:    Texinfo   7.2    >= 5.0
+    OK:    Xz        5.6.4  >= 5.0.0
+    OK:    Linux Kernel 6.13.4 >= 5.4
+    OK:    Linux Kernel supports UNIX 98 PTY
+    Aliases:
+    OK:    awk  is GNU
+    OK:    yacc is Bison
+    OK:    sh   is Bash
+    Compiler check:
+    OK:    g++ works
+    OK: nproc reports 7 logical cores are available
 
 #### Aditional software
 
@@ -108,7 +108,7 @@ LiveCD/DVD (/dev/sr0) or VirtIO(/dev/vda) drives can be used.
 
 ##### Target disk
 
-Target disk is disk which used to build a LFS system. disk should be used.
+Target disk is disk which used to build a LFS system.
 
 20GB or more IDE or SATA drive (/dev/sda) should be used.
 
@@ -205,14 +205,15 @@ You will get:
 
     Downloading check
 
-    Files wanted: 94 
-    Files found: 94 
+    Files wanted: 97 
+    Files found: 97 
     Files not found: 0 
-    
+
     Checksum check
-    
-    Files with checksums: 89 
+
+    Files with checksums: 92 
     Files with wrong checksums: 0 
+
 
 If some files not found then run downloader script again.
 
@@ -247,6 +248,24 @@ Build directory should be created according to config file before runing build.
 To init environment run:
 
     ./envinit
+
+### Target disk partitioning
+
+As mentioned in LFS book partition /dev/sda1 is needed.
+
+You can make any disk layout. Disk must have:
+
+- MBR partition table
+- First partition is target. It must have been formated as Linux partition.
+
+Swap paritions are optional. Swap can slowdown performance and damage SSD. 
+It's possible to use system without swap. In this case more memory is needed.
+
+To create MBR disk partition table with one Linux partition on disk /dev/sda run:
+
+    echo "label: mbr" |  sfdisk /dev/sda
+    echo "2048,,L" | sfdisk /dev/sda
+    sfdisk -A /dev/sda 1
 
 ### Build
 

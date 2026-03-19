@@ -2,23 +2,25 @@
 
 cd /sources
 
-rm -rfv xz-5.8.2
+rm -rf gettext-1.0
 
-tar -xf xz-5.8.2.tar.xz
+tar -xf gettext-1.0.tar.xz
 
-cd xz-5.8.2
+cd gettext-1.0
 
 ./configure --prefix=/usr    \
             --disable-static \
-            --docdir=/usr/share/doc/xz-5.8.2
-
+            --docdir=/usr/share/doc/gettext-1.0
 make
+
 
 if [[ "$ULFS_TESTS" == "YES" ]]
 then
-
 make check
-
 fi
 
+
 make install
+chmod -v 0755 /usr/lib/preloadable_libintl.so
+
+

@@ -2,20 +2,14 @@
 
 cd /sources
 
-rm -rfv glibc-2.42
+rm -rfv glibc-2.43
 
 
-tar -xf glibc-2.42.tar.xz
+tar -xf glibc-2.43.tar.xz
 
-cd glibc-2.42
+cd glibc-2.43
 
-patch -Np1 -i ../glibc-2.42-fhs-1.patch
-
-sed -e '/unistd.h/i #include <string.h>' \
-    -e '/libc_rwlock_init/c\
-  __libc_rwlock_define_initialized (, reset_lock);\
-  memcpy (&lock, &reset_lock, sizeof (lock));' \
-    -i stdlib/abort.c 
+patch -Np1 -i ../glibc-fhs-1.patch
 
 mkdir -v build
 cd       build
@@ -100,7 +94,7 @@ rpc: files
 # End /etc/nsswitch.conf
 EOF
 
-tar -xf ../../tzdata2025b.tar.gz
+tar -xf ../../tzdata2025c.tar.gz
 
 ZONEINFO=/usr/share/zoneinfo
 mkdir -pv $ZONEINFO/{posix,right}

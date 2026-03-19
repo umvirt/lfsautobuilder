@@ -12,7 +12,7 @@ LFS_TARGET_ARCH=
 # Target init 
 #
 # Possible values: "sysv", "systemd"
-# Default: "sysv"
+# Default: "systemd"
 #
 LFS_TARGET_INIT=
 
