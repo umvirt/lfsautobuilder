@@ -2,9 +2,11 @@
 
 cd /sources
 
-tar -xf zlib-1.3.2.tar.gz
+rm -rfv m4-1.4.21
 
-cd zlib-1.3.2
+tar -xf m4-1.4.21.tar.xz
+
+cd m4-1.4.21
 
 ./configure --prefix=/usr
 
@@ -15,7 +17,4 @@ then
 make check
 fi
 
-
 make install
-
-rm -fv /usr/lib/libz.a

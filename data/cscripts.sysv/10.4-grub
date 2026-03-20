@@ -13,8 +13,9 @@ set timeout=5
 insmod part_gpt
 insmod ext2
 set root=(hd0,1)
+#set gfxpayload=1024x768x32
 
-menuentry "GNU/Linux, Linux 6.16.1-lfs-12.4" {
-        linux   /boot/vmlinuz-6.16.1-lfs-12.4 root=/dev/sda1 ro
+menuentry "GNU/Linux, Linux 6.18.10-lfs-13.0-sysv" {
+        linux   /boot/vmlinuz-6.18.10-lfs-13.0-sysv root=/dev/sda1 ro
 }
 EOF

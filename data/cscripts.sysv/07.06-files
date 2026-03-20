@@ -7,6 +7,7 @@ cat > /etc/hosts << EOF
 ::1        localhost
 EOF
 
+
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/usr/bin/false
@@ -15,6 +16,7 @@ messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/usr/bin/false
 uuidd:x:80:80:UUID Generation Daemon User:/dev/null:/usr/bin/false
 nobody:x:65534:65534:Unprivileged User:/dev/null:/usr/bin/false
 EOF
+
 
 cat > /etc/group << "EOF"
 root:x:0:
@@ -31,9 +33,11 @@ dialout:x:10:
 audio:x:11:
 video:x:12:
 utmp:x:13:
+clock:x:14:
 cdrom:x:15:
 adm:x:16:
 messagebus:x:18:
+systemd-journal:x:23:
 input:x:24:
 mail:x:34:
 kvm:x:61:

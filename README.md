@@ -2,7 +2,7 @@
 
 LFS Version: 13.0
 
-Supported editions:  Systemd
+Supported editions: systemd, sysv.
 
 License: GPL
 
@@ -93,7 +93,7 @@ In addition you also need followed software packages:
 
 **Warning:**  Use hypervisor to set CPU model. Model "qemu64" is most safe and allows to move disk between machines with different CPU models.
 
-####Disks
+#### Disks
 
 VM should have two disks:
 
