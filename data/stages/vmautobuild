@@ -23,6 +23,17 @@ echo $s > log/current_autoscript
 
 date +%s > log/_$s.end
 
+if [ -f log/partition.lock ]
+then
+
+echo "Error: Target partiton not found!"
+
+rm log/partition.lock
+
+exit
+
+fi
+
 done
 
 date +%s > log/autobuild.end
