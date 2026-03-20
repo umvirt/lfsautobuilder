@@ -4,4 +4,5 @@ config/downloaderconfig.sh
 tmp/
 build/
 README.html
+SYSV.html
 patch

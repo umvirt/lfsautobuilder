@@ -4,3 +4,4 @@ dirs:
 
 doc: 
 	markdown README.md > README.html
+	markdown SYSV.md > SYSV.html
