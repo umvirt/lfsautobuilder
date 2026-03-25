@@ -1,9 +1,9 @@
 . env.sh
 
-./chrootcmd grub-install /dev/sda
+./chrootcmd grub-install $LFS_DISK
 ./chrootcmd passwd -d root
 
 rm -rfv $LFS/tmp/*
 
 #umount partition
-umount -v /dev/$PARTITION
+umount -v $LFS_PARTITION

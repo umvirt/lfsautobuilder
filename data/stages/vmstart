@@ -4,10 +4,14 @@
 touch log/partition.lock
 
 #if partiton exists
-if [ -b  /dev/$PARTITION ]
+if [ -b  $LFS_PARTITION ]
 then
 
-echo "Formatting partition: /dev/$PARTITION"
+if [[ "$LFS_FORMAT_PARTITION" == "YES" ]]
+then
+
+
+echo "Formatting partition: $LFS_PARTITION"
 echo ""
 echo "Formatting will be started at 10 seconds..."
 echo "It will destroy all data. Press Ctrl+C to cancel."
@@ -15,9 +19,12 @@ echo ""
 sleep 10
 
 #formating
-mkfs.ext4 -F /dev/$PARTITION
+mkfs.ext4 -F $LFS_PARTITION
+
+fi
+
 #mounting
-mount /dev/$PARTITION builddir
+mount $LFS_PARTITION builddir &&
 
 #delete lockfile
 rm log/partition.lock

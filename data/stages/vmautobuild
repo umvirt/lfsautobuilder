@@ -39,11 +39,11 @@ done
 date +%s > log/autobuild.end
 
 #mount partition
-mount -v /dev/$PARTITION builddir
+mount -v $LFS_PARTITION builddir
 
 #copy build log
 mkdir -p builddir/var/log/lfsautobuilder
 cp -rv log/* builddir/var/log/lfsautobuilder
 
 #umount partition
-umount -v /dev/$PARTITION
+umount -v $LFS_PARTITION

@@ -10,4 +10,16 @@ echo -e "-----------------------------------\n"
 
 echo "Target architecture: $LFS_TARGET_ARCH"
 echo "Target init system: $LFS_TARGET_INIT"
+echo "Target partition: $LFS_PARTITION"
+echo "Running partition: $LFS_RUNNING_PARTITION"
+echo "Target partition formatting: $LFS_FORMAT_PARTITION"
+echo "MBR bootloader installation: $LFS_MBR"
 echo
+if [[ $LFS_MBR = "YES" ]]
+then
+echo "GRUB MBR bootloader installation settings"
+echo
+echo "Running disk number: $LFS_RUNNING_DISK_NUMBER"
+echo "Running partition number: $LFS_RUNNING_PARTITION_NUMBER"
+echo "Target disk to install MBR: $LFS_DISK"
+fi

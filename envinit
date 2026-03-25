@@ -53,15 +53,21 @@ fi
 echo -e "Writing config file 'env.sh'...\n"
 echo '#Configuration file for scripts to run on host as root' > build/env.sh
 echo  >> build/env.sh
+echo  '#User-defined settings'>> build/env.sh
+echo  >> build/env.sh
 echo 'PWD=`pwd`' >> build/env.sh
 echo 'LFS="$PWD/builddir"' >> build/env.sh
 echo 'MAKEFLAGS="-j`nproc`"' >> build/env.sh
-echo 'PARTITION="sda1"' >>  build/env.sh
-echo 'DISK=`echo $PARTITION | sed -e "s/[0-9]*$//"`' >> build/env.sh
+echo "LFS_PARTITION=\"$LFS_PARTITION\"" >>  build/env.sh
+echo "LFS_FORMAT_PARTITION=\"$LFS_FORMAT_PARTITION\"" >>  build/env.sh
+echo  >> build/env.sh
+echo  '#Calculated settings'>> build/env.sh
+echo  >> build/env.sh
+echo "LFS_DISK=\"`echo $LFS_PARTITION | sed -e \"s/[0-9]*$//\"`\"" >> build/env.sh
 echo  >> build/env.sh
 echo 'echo $LFS' >> build/env.sh
 echo  >> build/env.sh
-echo 'export PWD LFS MAKEFLAGS PARTITION DISK' >> build/env.sh
+echo 'export PWD LFS MAKEFLAGS LFS_PARTITION LFS_DISK LFS_FORMAT_PARTITION' >> build/env.sh
 
 echo '---'
 cat build/env.sh
@@ -177,3 +183,37 @@ chmod -v 777 build/{env.sh,userenv.sh,cscripts.config/{config.sh,env.sh}}
 echo -e "\nBuild directory created\n"
 
 
+echo "Replacing /dev/sda1 to $LFS_RUNNING_PARTITION (according to \$LFS_RUNNING_PARTITiON)..."
+echo
+echo build/cscripts/10*-fstab
+sed -e "s|/dev/sda1|$LFS_RUNNING_PARTITION|" -i build/cscripts/10*-fstab
+
+if [[ $LFS_MBR = "YES" ]]
+then
+
+echo build/cscripts/10*-grub
+sed -e "s|/dev/sda1|$LFS_RUNNING_PARTITION|" -i build/cscripts/10*-grub
+
+
+
+echo
+echo "Replacing /dev/sda to $LFS_DISK (according to \$LFS_DISK)..."
+echo
+echo build/cscripts/10*-grub
+sed -e "s|grub-install /dev/sda|grub-install $LFS_DISK|" -i build/cscripts/10*-grub
+echo
+GRUB_ROOT_SRC="(hd0,1)"
+GRUB_ROOT_TGT="(hd$LFS_RUNNING_DISK_NUMBER,$LFS_RUNNING_PARTITION_NUMBER)"
+echo "Replacing $GRUB_ROOT_SRC to $GRUB_ROOT_TGT (according to \$LFS_RUNNING_DISK_NUMBER and \$LFS_RUNNING_PARTITION_NUMBER)..."
+echo
+echo build/cscripts/10*-grub
+sed -e "s|$GRUB_ROOT_SRC|$GRUB_ROOT_TGT|" -i build/cscripts/10*-grub
+
+else
+
+echo
+echo Deleting GRUB MBR bootloader script
+echo
+rm -v build/cscripts/10*-grub
+
+fi

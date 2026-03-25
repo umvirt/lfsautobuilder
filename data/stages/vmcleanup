@@ -1,14 +1,14 @@
 . env.sh
 
 #umount partition
-#umount /dev/$PARTITION
+#umount $LFS_PARTITION
 #reset journal
-#tune2fs -O ^has_journal /dev/$PARTITION
+#tune2fs -O ^has_journal $LFS_PARTITION
 #mount partition
-mount -v /dev/$PARTITION builddir
+mount -v $LFS_PARTITION builddir
 
 #defrag
-#e4defrag /dev/$PARTITION
+#e4defrag $LFS_PARTITION
 
 #fill empty space with zeroes
 dd if=/dev/zero of=$LFS/zero bs=16384 status=progress
@@ -31,4 +31,4 @@ free -m
 rm -v $LFS/zero
 
 #umount partition
-umount -v /dev/$PARTITION
+umount -v $LFS_PARTITION
