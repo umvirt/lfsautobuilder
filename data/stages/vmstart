@@ -4,7 +4,7 @@
 touch log/partition.lock
 
 #if partiton exists
-if [ -b  $LFS_PARTITION ]
+if [ -b  $LFS_PARTITION ] || [ -f $LFS_PARTITION ]
 then
 
 if [[ "$LFS_FORMAT_PARTITION" == "YES" ]]
