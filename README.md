@@ -95,7 +95,7 @@ In addition you also need followed software packages:
 
 #### Disks
 
-VM should have two disks:
+On default scenario VM should have two disks:
 
 - System disk
 - Target disk
@@ -239,7 +239,16 @@ Sample dumpconfig output:
 
     Target architecture: amd64
     Target init system: systemd
+    Target partition: /dev/sda1
+    Running partition: /dev/sda1
+    Target partition formatting: YES
+    MBR bootloader installation: YES
 
+    GRUB MBR bootloader installation settings
+
+    Running disk number: 0
+    Running partition number: 1
+    Target disk to install MBR: /dev/sda
 
 ### Build environment init
 
@@ -283,13 +292,80 @@ It's possible to use tmux version:
 
     ./vmautobuild-tmux
 
+## Alternative scenarios
+
+### Building on other partition
+
+To build LFS on other partition change LFS\_PARTITION and LFS\_RUNNING\_PARTITION
+settings in config file.
+
+For example, to install and boot from /dev/sda2 set
+
+    LFS_PARTITION=/dev/sda2
+    LFS_RUNNING_PARTITION=/dev/sda2
+
+If you wish to install on first drive and use installed system from second
+drive on other device set:
+
+    LFS_PARTITION=/dev/sda2
+    LFS_RUNNING_PARTITION=/dev/sdb2
+
+If you wish to install on second drive and use installed system from first
+drive on other deviceset:
+
+    LFS_PARTITION=/dev/sdb1
+    LFS_RUNNING_PARTITION=/dev/sda1
+
+### Building in file
+
+On containers, user-mode-linux, VMs filesystem image files can be used.
+
+LFSAutoBuilder can build such files. To do that create file, for example:
+
+    qemu-img create x.img 20G
+
+Then set:
+
+    LFS_PARTITION=/path/to/x.img
+    LFS_RUNNING_PARTITION=/dev/sda
+
+To boot such system extract vmlinuz-* file then use it 
+
+For example, to perform disk image (lfs-root.img) direct kernel boot 
+(lfs-root.vmlinuz) in QEMU run:
+
+    qemu -kernel lfs-root.vmlinuz -append "root=/dev/sda console=ttyS0" -hda lfs-root.img -display none -serial stdio
+
 ## Additional information
 
-### Build Directory structure
+### Root directory structure
 
-- **books/** - files provided with LFS book.
-    - wget-list - source packages & patches files list.
-    - md5sums - md5-checksums for downloaded files integrity check.
+- **build/** - build environment directory
+- **config/** - configuration files
+- **data/** - source data files for build environment
+    - **config/** - configuration files templates
+    - **cscripts.config/** - config files for chroot scripts.
+    - **cscripts.systemd/** - chroot scripts for systemd edition.
+    - **cscripts.sysv/** - chroot scripts for sysv edition.
+    - **scripts/** - early stage scripts
+    - **stages/** - main scripts
+    - configparser.sh - common config file processor. Adds default values.
+- **src/** - source files
+    - **books/** - files provided with LFS book.
+        - wget-list - source packages & patches files list.
+        - md5sums - md5-checksums for downloaded files integrity check.
+    - **packages/** - source packages files
+- **tmp/** - temporary directory
+- checksrc - source packages integrity check
+- downloadsrc - source packages downloader
+- dumpconfig - print build configuration
+- envinit - build environment (BE) directory initialization/update
+- versioncheck.sh - build environment check
+- vmautobuild - one click target building **(DANGEROUS*)**
+- vmautobuild-tmux - TMUX version of *vmautobuild*
+
+### Build environment directory structure
+
 - **builddir/** - LFS root partition mount point.
 - **samples/** - configuration file samples.
 - **cscripts/** - scripts to run by **root** user in chroot mode (Stage 2).

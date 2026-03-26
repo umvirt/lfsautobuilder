@@ -4,7 +4,7 @@ LFS_PARTITION='/dev/sda1'
 fi
 if [[ $LFS_RUNNING_PARTITION == "" ]]
 then
-LFS_PARTITION='/dev/sda1'
+LFS_RUNNING_PARTITION='/dev/sda1'
 fi
 if [[ $LFS_FORMAT_PARTITIONR == "" ]]
 then
