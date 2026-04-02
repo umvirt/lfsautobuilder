@@ -138,6 +138,9 @@ LC_ALL=POSIX
 EOF
 
 
+echo "LFS_KERNEL_CONFIG=$LFS_KERNEL_CONFIG" >> build/cscripts.config/env.sh
+
+
 if [[ $LFS_TARGET_ARCH = "amd64" ]]
 then
 

@@ -10,6 +10,7 @@ echo -e "-----------------------------------\n"
 
 echo "Target architecture: $LFS_TARGET_ARCH"
 echo "Target init system: $LFS_TARGET_INIT"
+echo "Target system kernel config: $LFS_KERNEL_CONFIG"
 echo "Target partition: $LFS_PARTITION"
 echo "Running partition: $LFS_RUNNING_PARTITION"
 echo "Target partition formatting: $LFS_FORMAT_PARTITION"

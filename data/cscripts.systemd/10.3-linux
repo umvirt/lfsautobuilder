@@ -41,9 +41,50 @@ make mrproper
 
 
 
+if [[ $LFS_KERNEL_CONFIG == "defconfig" ]]
+then
+
 echo "$ARCH make defconfig" >> kernelbuilder
 
-echo "$ARCH make" >> kernelbuilder
+fi
+
+if [[ $LFS_KERNEL_CONFIG == "lfs" ]]
+then
+
+echo "$ARCH make defconfig" >> kernelbuilder
+
+echo "$ARCH scripts/config --enable CONFIG_DRM_SIMPLEDRM" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_DRM_FBDEV_EMULATION" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_SYSFB_SIMPLEFB" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_DRM_PANIC" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_FRAMEBUFFER_CONSOLE" >> kernelbuilder
+echo "$ARCH scripts/config --disable CONFIG_WERROR" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_MEMCG" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_PSI" >> kernelbuilder
+echo "$ARCH scripts/config --set-str CONFIG_DRM_PANIC_SCREEN kmsg" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_BLK_DEV_NVME" >> kernelbuilder
+
+
+if [[ "$LFS_TGT" == "i486-lfs-linux-gnu" || "$LFS_TGT" == "i586-lfs-linux-gnu" || "$LFS_TGT" == "i686-lfs-linux-gnu" ]]
+then
+
+echo "$ARCH scripts/config --enable CONFIG_HIGHMEM4G" >> kernelbuilder
+
+fi
+
+if [[ "$LFS_TGT" == "x86_64-lfs-linux-gnu" ]]
+then
+
+echo "$ARCH scripts/config --enable CONFIG_IRQ_REMAP" >> kernelbuilder
+echo "$ARCH scripts/config --enable CONFIG_X86_X2APIC" >> kernelbuilder
+
+fi
+
+fi
+
+
+
+echo "yes '' | $ARCH make" >> kernelbuilder
 
 echo "$ARCH make modules_install" >> kernelbuilder
 

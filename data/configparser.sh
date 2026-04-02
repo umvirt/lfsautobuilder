@@ -2,6 +2,10 @@ if [[ $LFS_PARTITION == "" ]]
 then
 LFS_PARTITION='/dev/sda1'
 fi
+if [[ $LFS_KERNEL_CONFIG == "" ]]
+then
+LFS_KERNEL_CONFIG='lfs'
+fi
 if [[ $LFS_RUNNING_PARTITION == "" ]]
 then
 LFS_RUNNING_PARTITION='/dev/sda1'
