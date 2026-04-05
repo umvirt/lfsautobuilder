@@ -16,6 +16,19 @@ LFS_TARGET_ARCH=
 #
 LFS_TARGET_INIT=
 #
+# Linux kernel configuration
+#
+#  - defconfig - 'make defconfig' only
+#  - lfs - 'make defconfig' + LFS book settings (Chapter 10.3)
+#
+# After building target system kernel config validation can be done with
+# ulfs-kernel-config-checker.
+#
+# Possible values: "lfs", "defconfig"
+# Default: "lfs"
+#
+LFS_KERNEL_CONFIG=
+#
 # Taget partition (in build environment context)
 #
 # LFS root partition (filesystem) full path for customization.
@@ -27,19 +40,6 @@ LFS_TARGET_INIT=
 # - Disk partition: /dev/sda1, /dev/vda1
 # - Partition on device mapper: /dev/mapper/logicalvolumep1
 # Default: "/dev/sda1"
-#
-LFS_KERNEL_CONFIG=
-#
-# Linux kernel configuration
-#
-#  - defconfig - 'make defconfig' only
-#  - lfs - 'make defconfig' + LFS book settings (Chapter 10.3)
-#
-# After building target system kernel config validation can be done with
-# ulfs-kernel-config-checker.
-#
-# Possible values: "lfs", "defconfig"
-# Default: "lfs"
 #
 LFS_PARTITION=
 #
