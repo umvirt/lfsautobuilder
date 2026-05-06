@@ -6,12 +6,17 @@ rm -rfv linux-6.18.10
 
 tar -xf linux-6.18.10.tar.xz
 
+cd linux-6.18.10
+
+# fix critical vulnerability
+patch -p1 < ../CVE-2026-31431-fix.patch
+
 if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
 then
+    cd ..
     cp -rv linux-6.18.10 /usr/src
+    cd linux-6.18.10
 fi
-
-cd linux-6.18.10
 
 #FORCING ARCH 
 ARCH=""

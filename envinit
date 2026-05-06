@@ -175,6 +175,10 @@ echo -e "\nCreating symlink to sources directory\n"
 
 ln -sv ../src/packages build/src
 
+echo -e "\nCreating symlink to extra directory\n"
+
+ln -sv ../extra build/extra
+
 echo -e "\nCreating directories...\n"
 mkdir -v build/{builddir,log,tmp}
 
