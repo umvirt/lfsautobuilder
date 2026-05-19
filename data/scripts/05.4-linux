@@ -1,7 +1,7 @@
 cd $LFS/sources
-tar -xf linux-6.16.1.tar.xz
+tar -xf linux-6.18.31.tar.xz
 
-cd linux-6.16.1
+cd linux-6.18.31
 
 make mrproper
 

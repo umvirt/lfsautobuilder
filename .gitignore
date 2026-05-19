@@ -1,4 +1,4 @@
-src/
+src/packages
 config/config.sh
 config/downloaderconfig.sh
 tmp/
