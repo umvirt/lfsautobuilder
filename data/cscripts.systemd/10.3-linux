@@ -8,8 +8,10 @@ tar -xf linux-6.18.31.tar.xz
 
 cd linux-6.18.31
 
-# fix critical vulnerability
+# fix critical vulnerabilities
 patch -p1 < ../CVE-2026-46300-fix.patch
+patch -p1 < ../pintheft-fix.patch
+patch -p1 < ../grofrag-fix.patch
 
 if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
 then
