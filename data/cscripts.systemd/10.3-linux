@@ -2,20 +2,22 @@
 
 cd /sources
 
-rm -rfv linux-6.18.10
+rm -rfv linux-6.18.31
 
-tar -xf linux-6.18.10.tar.xz
+tar -xf linux-6.18.31.tar.xz
 
-cd linux-6.18.10
+cd linux-6.18.31
 
-# fix critical vulnerability
-patch -p1 < ../CVE-2026-31431-fix.patch
+# fix critical vulnerabilities
+patch -p1 < ../CVE-2026-46300-fix.patch
+patch -p1 < ../pintheft-fix.patch
+patch -p1 < ../grofrag-fix.patch
 
 if [[ "$ULFS_COPY_KERNEL_SOURCES" == "YES" ]]
 then
     cd ..
-    cp -rv linux-6.18.10 /usr/src
-    cd linux-6.18.10
+    cp -rv linux-6.18.31 /usr/src
+    cd linux-6.18.31
 fi
 
 #FORCING ARCH 
@@ -99,16 +101,16 @@ cat kernelbuilder
 
 ./kernelbuilder
 
-cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.18.10-lfs-13.0-systemd
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.18.31-lfs-13.0-systemd
 
-cp -iv System.map /boot/System.map-6.18.10
+cp -iv System.map /boot/System.map-6.18.31
 
-cp -iv .config /boot/config-6.18.10
+cp -iv .config /boot/config-6.18.31
 
 if [[ "$ULFS_DOCS" == "YES" ]]
 then
 
-cp -r Documentation -T /usr/share/doc/linux-6.18.10
+cp -r Documentation -T /usr/share/doc/linux-6.18.31
 
 fi
 
@@ -121,3 +123,6 @@ install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 
 # End /etc/modprobe.d/usb.conf
 EOF
+
+# Security fix (CVE-2026-31431 mitigation)
+echo "install algif_aead /bin/false" > /etc/modprobe.d/disable-algif.conf

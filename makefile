@@ -1,6 +1,6 @@
 dirs:
-	mkdir -v {build,src{,/books,/packages},tmp}
-	chmod -v 777 {build,src{,/books,/packages},tmp}
+	mkdir -v build src/packages tmp
+	chmod -v 777 build src/packages tmp
 
 doc: 
 	markdown README.md > README.html
