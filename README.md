@@ -1,12 +1,6 @@
 # UmVirt LFSAutoBuilder
 
-LFS Version: 13.0 + security fixes (Linux kernel updated to 6.18.31 + kernel patches)
-
-Kernel patches:
-
-* CVE-2026-46300-fix.patch
-* grofrag-fix.patch
-* pintheft-fix.patch
+LFS Version: 13.0 + security fix (Linux kernel updated to 6.18.45)
 
 Supported editions: systemd, sysv.
 
